@@ -15,6 +15,11 @@ class CreateGameRelationshipsTable extends Migration
     {
         Schema::create('game_relationships', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('game_id')->constrained('games_lists', 'id');
+            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->foreignId('rank_id')->nullable()->constrained('ranks', 'id');
+            $table->string('ingame_name')->nullable();
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }

@@ -10,6 +10,10 @@ window.Vue = require('vue').default;
 import BootstrapVue from 'bootstrap-vue';
 Vue.use(BootstrapVue);
 
+import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
+import {ValidationObserver} from "vee-validate";
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -21,8 +25,11 @@ Vue.use(BootstrapVue);
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('ValidationProvider', ValidationProvider);
+Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('login-form', require('./components/Login.vue').default);
+Vue.component('register-form', require('./components/Register.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

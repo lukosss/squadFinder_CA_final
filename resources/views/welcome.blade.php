@@ -22,7 +22,10 @@
         </style>
     </head>
     <body class="antialiased">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
+    <div id="app">
+
+
+    <nav  class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 SquadFinder
@@ -42,15 +45,11 @@
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
-                            <div id="app">
                                 <login-form></login-form>
-                            </div>
                         @endif
 
                         @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
+                                <register-form></register-form>
                         @endif
                     @else
                         <li class="nav-item dropdown">
@@ -75,7 +74,8 @@
             </div>
         </div>
     </nav>
-            <div id="app"><example-component></example-component></div>
+<example-component></example-component>
+    </div>
     </body>
 <script src="{{ mix('js/app.js') }}"></script>
 </html>

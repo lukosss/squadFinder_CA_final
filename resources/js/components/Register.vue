@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-button v-b-modal.modal-2 variant="primary">Register</b-button>
+        <b-button v-b-modal.modal-2 variant="primary" class="ml-3">Register</b-button>
 
         <b-modal id="modal-2" title="Register">
             <div>

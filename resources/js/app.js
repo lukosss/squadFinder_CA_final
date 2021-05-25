@@ -19,7 +19,7 @@ import {ValidationObserver} from "vee-validate";
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
  *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ * Eg. ./components/LandingPage.vue -> <example-component></example-component>
  */
 
 // const files = require.context('./', true, /\.vue$/i)
@@ -27,9 +27,10 @@ import {ValidationObserver} from "vee-validate";
 
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('landing-page', require('./components/LandingPage.vue').default);
 Vue.component('login-form', require('./components/Login.vue').default);
 Vue.component('register-form', require('./components/Register.vue').default);
+Vue.component('main-app', require('./components/MainApp.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -37,7 +38,8 @@ Vue.component('register-form', require('./components/Register.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
+import router from './Router';
 const app = new Vue({
     el: '#app',
-});
+    router
+}).$mount('#app');

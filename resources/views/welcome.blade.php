@@ -74,7 +74,7 @@
             </div>
         </div>
     </nav>
-<example-component></example-component>
+<landing-page></landing-page>
     </div>
     </body>
 <script src="{{ mix('js/app.js') }}"></script>

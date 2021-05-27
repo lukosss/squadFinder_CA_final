@@ -33,13 +33,13 @@
                                                     @lang('app.id')
                                                 </th>
                                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                                    @lang('app.role')
+                                                </th>
+                                                <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                                     @lang('app.name')
                                                 </th>
                                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                                     @lang('app.email')
-                                                </th>
-                                                <th class="sorting" tabindex="0" rowspan="1" colspan="1">
-                                                    @lang('app.password')
                                                 </th>
                                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                                     @lang('app.actions')
@@ -51,11 +51,16 @@
                                                 <tr class="odd">
                                                     <td>{{$user->created_at ?? ''}}</td>
                                                     <td>{{$user->id ?? ''}}</td>
-                                                    <td>{{$user->name ?? ''}}</td>
+                                                    <td>{{$user->role->role_name ?? ''}}</td>
+                                                    <td>{{$user->first_name ?? ''}}</td>
                                                     <td>{{$user->email ?? ''}}</td>
-                                                    <td>{{$user->password ?? ''}}</td>
-                                                    <td><a class="btn btn-info"
+                                                    <td class="d-flex justify-content-around"><a class="btn btn-info"
                                                            href="{{route('admin.users.edit', $user->id)}}">@lang('app.edit')</a>
+                                                        <form action="{{route('admin.users.destroy', $user->id)}}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <input type="submit" class="btn btn-danger" value="@lang('app.delete')">
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $users = User::get();
+        $users = User::with('role')->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -66,13 +66,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreUserRequest $request
+     * @param User $user
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(StoreUserRequest $request, User $user): RedirectResponse
     {
-        //
+        $user->fill($request->all())->save();
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -83,6 +84,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('admin.users.index');
     }
 }

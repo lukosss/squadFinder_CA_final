@@ -2,11 +2,11 @@
 
 @section('content')
     <?php
-    if($model->exists){
+    if ($model->exists) {
         $tableColor = 'primary';
         $action = 'edit';
-        $route = route('admin.users.update',$model);
-    }else{
+        $route = route('admin.users.update', $model);
+    } else {
         $tableColor = 'success';
         $action = 'create';
         $route = route('admin.users.store');
@@ -31,34 +31,81 @@
                             <div class="card-body row">
                                 <div class="form-group col-4">
                                     <label for="first_name">@lang('app.first_name')</label>
-                                    <input type="text" class="form-control" name="first_name" id="first_name" value= "{{$model->first_name ?? ''}}" placeholder="@lang('app.enter_first_name')">
+                                    <input type="text" class="form-control" name="first_name" id="first_name"
+                                           value="{{$model->first_name ?? ''}}"
+                                           placeholder="@lang('app.enter_first_name')">
                                 </div>
 
                                 <div class="form-group col-4">
                                     <label for="last_name">@lang('app.last_name')</label>
-                                    <input type="text" class="form-control" name="last_name" id="last_name" value= "{{$model->last_name ?? ''}}" placeholder="@lang('app.enter_last_name')">
+                                    <input type="text" class="form-control" name="last_name" id="last_name"
+                                           value="{{$model->last_name ?? ''}}"
+                                           placeholder="@lang('app.enter_last_name')">
                                 </div>
 
                                 <div class="form-group col-4">
                                     <label for="email">@lang('app.email')</label>
-                                    <input type="email" class="form-control" name="email" id="email" value= "{{$model->email ?? ''}}" placeholder="@lang('app.enter_email')">
+                                    <input type="email" class="form-control" name="email" id="email"
+                                           value="{{$model->email ?? ''}}" placeholder="@lang('app.enter_email')">
                                 </div>
 
                                 <div class="form-group col-4">
-                                    <label for="phone">@lang('app.phone')</label>
-                                    <input type="text" class="form-control" name="phone" id="phone" value= "{{$model->phone ?? ''}}" placeholder="@lang('app.enter_phone')">
+                                    <label for="city">@lang('app.city_id')</label>
+                                    <input type="text" class="form-control" name="city" id="city"
+                                           value="{{$model->city_id ?? ''}}" placeholder="@lang('app.enter_city')">
                                 </div>
 
                                 <div class="form-group col-4">
-                                    <label for="address">@lang('app.address')</label>
-                                    <input type="text" class="form-control" name="address" id="address" value= "{{$model->address ?? ''}}" placeholder="@lang('app.enter_address')">
+                                    <label for="display_name">@lang('app.display_name')</label>
+                                    <input type="text" class="form-control" name="display_name" id="display_name"
+                                           value="{{$model->display_name ?? ''}}" placeholder="@lang('app.enter_display_name')">
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="bio">@lang('app.bio')</label>
+                                    <input type="text" class="form-control" name="bio" id="bio"
+                                           value="{{$model->bio ?? ''}}" placeholder="@lang('app.enter_bio')">
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="avatar_logo">@lang('app.avatar_logo')</label>
+                                    <input type="text" class="form-control" name="avatar_logo" id="avatar_logo"
+                                           value="{{$model->avatar_logo ?? ''}}" placeholder="@lang('app.enter_avatar_logo')">
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="discord_username">@lang('app.discord_username')</label>
+                                    <input type="text" class="form-control" name="discord_username" id="discord_username"
+                                           value="{{$model->discord_username ?? ''}}" placeholder="@lang('app.enter_discord_username')">
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="steam_username">@lang('app.steam_username')</label>
+                                    <input type="text" class="form-control" name="steam_username" id="steam_username"
+                                           value="{{$model->steam_username ?? ''}}" placeholder="@lang('app.enter_steam_username')">
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="epic_username">@lang('app.epic_username')</label>
+                                    <input type="text" class="form-control" name="epic_username" id="epic_username"
+                                           value="{{$model->epic_username ?? ''}}" placeholder="@lang('app.enter_epic_username')">
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="origin_username">@lang('app.origin_username')</label>
+                                    <input type="text" class="form-control" name="origin_username" id="origin_username"
+                                           value="{{$model->origin_username ?? ''}}" placeholder="@lang('app.enter_origin_username')">
                                 </div>
 
                                 <div class="form-group col-4">
                                     <label for="password">@lang('app.password')</label>
-                                    <input type="password" class="form-control" name="password" id="password" value= "{{$model->password ?? ''}}" placeholder="@lang('app.enter_password')">
+                                    <input type="password" class="form-control" name="password" id="password"
+                                           value="{{$model->password ?? ''}}" placeholder="@lang('app.enter_password')">
                                 </div>
                             </div>
+                                @if ($errors->first)
+                                <span class="text-danger"> {{$errors->first()}} </span>
+                                @endif
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">@lang('app.submit')</button>
                             </div>

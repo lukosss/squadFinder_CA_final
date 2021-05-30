@@ -20,6 +20,11 @@
             </a>
         </li>
         <li>
+            <a href="{{ route('admin.ranks.index') }}" class="nav-link text-white">
+                Ranks
+            </a>
+        </li>
+        <li>
             <a href="{{ route('admin.cities.index') }}" class="nav-link text-white">
                 Cities
             </a>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RankController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -34,5 +35,6 @@ Route::prefix('admin')
         Route::resource('users',UserController::class);
         Route::resource('games',GameController::class);
         Route::resource('cities',CityController::class);
+        Route::resource('ranks',RankController::class);
 
     });

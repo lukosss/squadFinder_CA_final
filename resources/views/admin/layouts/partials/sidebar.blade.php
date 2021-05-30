@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark min-vh-100 col-12" style="width: 280px;">
+<div class="sticky-top d-flex flex-column flex-shrink-0 p-3 text-white bg-dark min-vh-100 col-12" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <span class="fs-4">Admin Panel</span>
     </a>
@@ -15,12 +15,12 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('admin.games.index') }}" class="nav-link text-white">
                 Games
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('admin.cities.index') }}" class="nav-link text-white">
                 Cities
             </a>
         </li>

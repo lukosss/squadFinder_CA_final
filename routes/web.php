@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -30,5 +32,7 @@ Route::prefix('admin')
         Route::get('/', [HomeController::class, 'index']);
         Route::get('home', [HomeController::class, 'index']);
         Route::resource('users',UserController::class);
+        Route::resource('games',GameController::class);
+        Route::resource('cities',CityController::class);
 
     });

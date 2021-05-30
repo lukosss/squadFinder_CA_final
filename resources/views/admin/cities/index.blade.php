@@ -1,4 +1,4 @@
-@extends('admin.layouts.partials.page',['content_title'=>trans('app.users')])
+@extends('admin.layouts.partials.page',['content_title'=>trans('app.games')])
 
 @section('content')
     <section class="content mt-3">
@@ -7,9 +7,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
-                            <h3 class="card-title">@lang('app.users-list')</h3>
+                            <h3 class="card-title">@lang('app.cities-list')</h3>
                             <div>
-                                <a href="{{route('admin.users.create')}}" style = "float:right" class="btn btn-success" href="">@lang('app.new')</a>
+                                <a href="{{route('admin.cities.create')}}" style = "float:right" class="btn btn-success" href="">@lang('app.new')</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -20,26 +20,17 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="user_table"
+                                        <table id="city_table"
                                                class="table table-bordered table-hover dataTable dtr-inline"
                                                role="grid" aria-describedby="example2_info">
                                             <thead>
                                             <tr role="row">
                                                 <th class="sorting sorting_asc" tabindex="0" rowspan="1" colspan="1"
                                                     aria-sort="ascending">
-                                                    @lang('app.created_at')
-                                                </th>
-                                                <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                                     @lang('app.id')
                                                 </th>
                                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1">
-                                                    @lang('app.role')
-                                                </th>
-                                                <th class="sorting" tabindex="0" rowspan="1" colspan="1">
-                                                    @lang('app.name')
-                                                </th>
-                                                <th class="sorting" tabindex="0" rowspan="1" colspan="1">
-                                                    @lang('app.email')
+                                                    @lang('app.city-name')
                                                 </th>
                                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                                     @lang('app.actions')
@@ -47,16 +38,13 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($users as $user)
+                                            @foreach($cities as $city)
                                                 <tr class="odd">
-                                                    <td>{{$user->created_at ?? ''}}</td>
-                                                    <td>{{$user->id ?? ''}}</td>
-                                                    <td>{{$user->role->role_name ?? ''}}</td>
-                                                    <td>{{$user->first_name ?? ''}}</td>
-                                                    <td>{{$user->email ?? ''}}</td>
+                                                    <td>{{$city->id ?? ''}}</td>
+                                                    <td>{{$city->city_name ?? ''}}</td>
                                                     <td class="d-flex justify-content-around"><a class="btn btn-info"
-                                                           href="{{route('admin.users.edit', $user->id)}}">@lang('app.edit')</a>
-                                                        <form action="{{route('admin.users.destroy', $user->id)}}" method="post">
+                                                           href="{{route('admin.cities.edit', $city->id)}}">@lang('app.edit')</a>
+                                                        <form action="{{route('admin.cities.destroy', $city->id)}}" method="post">
                                                             @csrf
                                                             @method('DELETE')
                                                             <input type="submit" class="btn btn-danger" value="@lang('app.delete')">

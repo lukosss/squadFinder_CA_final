@@ -1,7 +1,13 @@
 <template>
     <div id="app">
-        <SideNavbar/>
-        <router-view />
+        <div class="row">
+            <div class="col-2 p-0">
+                <SideNavbar/>
+            </div>
+            <div class="col-10 text-white d-flex justify-content-around mt-3">
+                <router-view></router-view>
+            </div>
+        </div>
     </div>
 </template>
 

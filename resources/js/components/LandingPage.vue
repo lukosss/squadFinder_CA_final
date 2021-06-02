@@ -3,7 +3,7 @@
         <div class="overlay">
         <div class="container">
             <div class="pt-5">
-                <h2>Join Thousands of Players on Squad Finder Now!</h2>
+                <h2>Join Thousands of Gamers, Find Your Squad Now!</h2>
             </div>
         </div>
         </div>

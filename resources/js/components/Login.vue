@@ -4,7 +4,7 @@
 
         <b-modal id="modal-1" title="Login">
             <div>
-                <b-form id="loginForm" @submit.prevent="onSubmit" v-if="show">
+                <b-form id="loginForm" @submit="onSubmit" v-if="show">
                     <b-form-group
                         id="input-group-1"
                         label="Email address:"
@@ -54,14 +54,21 @@ export default {
                 password: '',
                 checked: false,
             },
-            foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
             show: true
         }
     },
     methods: {
-        onSubmit(event) {
-            event.preventDefault()
-            alert(JSON.stringify(this.form))
+        onSubmit() {
+            axios.post('/login', {
+                email: this.form.email,
+                password: this.form.password
+            })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         },
     }
 }

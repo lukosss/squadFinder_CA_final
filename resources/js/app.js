@@ -49,10 +49,10 @@ parent.trigger('change');
 
 /**
  * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
+ * Vue Components. It will recursively scan this directory for the Vue
+ * Components and automatically register them with their "basename".
  *
- * Eg. ./components/LandingPage.vue -> <example-component></example-component>
+ * Eg. ./Components/LandingPage.vue -> <example-component></example-component>
  */
 
 // const files = require.context('./', true, /\.vue$/i)
@@ -60,19 +60,23 @@ parent.trigger('change');
 
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
-Vue.component('landing-page', require('./components/LandingPage.vue').default);
-Vue.component('login-form', require('./components/Login.vue').default);
-Vue.component('register-form', require('./components/Register.vue').default);
-Vue.component('main-app', require('./components/MainApp.vue').default);
+Vue.component('landing-page', require('./Pages/LandingPage.vue').default);
+Vue.component('login-form', require('./Components/Login.vue').default);
+Vue.component('register-form', require('./Components/Register.vue').default);
+Vue.component('main-app', require('./App.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
+ * the page. Then, you may begin adding Components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import router from './Router';
+import router from './Router/index';
+import store from './Store/index';
+
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store,
+    components: {App}
 }).$mount('#app');

@@ -8,6 +8,7 @@ use App\Http\Controllers\RankController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginControllerFront;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/loginFront', [LoginControllerFront::class, 'authenticate']);
 
 Route::prefix('admin')
-//    ->middleware('auth')
+    ->middleware('auth')
     ->name('admin.')->group(function(){
         Route::get('/', [HomeController::class, 'index']);
         Route::get('home', [HomeController::class, 'index']);

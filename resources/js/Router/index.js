@@ -7,17 +7,22 @@ const routes = [
     {
         path: '/',
         name: 'Dash',
-        component: () => import('../components/Dashboard.vue'),
+        component: () => import('../Pages/Dashboard.vue'),
     },
     {
         path: '/home',
         name: 'Dashboard',
-        component: () => import('../components/Dashboard.vue'),
+        component: () => import('../Pages/Dashboard.vue'),
+    },
+    {
+        path: '/profile',
+        name: 'Profile',
+        component: () => import('../Pages/Profile.vue'),
     },
     {
         path: '/games',
         name: 'GamesList',
-        component: () => import('../components/GamesList.vue'),
+        component: () => import('../Pages/GamesList.vue'),
     },
 ];
 

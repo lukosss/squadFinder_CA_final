@@ -58,6 +58,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="nav-item dropdown-item">
+                                        <router-link class="text-dark" to="/profile">
+                                            Profile
+                                        </router-link>
+                                    </a>
+
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -68,17 +76,10 @@
                                         @csrf
                                     </form>
                                 </div>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('profile') }}">
-                                        {{ __('Profile') }}
-                                    </a>
-                                </div>
                             </li>
                         @endguest
                     </ul>
                 </div>
-            </div>
         </nav>
 
         <main>

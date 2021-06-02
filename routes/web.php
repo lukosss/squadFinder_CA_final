@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\GameUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RankController;
 use App\Http\Controllers\UserController;
@@ -36,5 +37,8 @@ Route::prefix('admin')
         Route::resource('games',GameController::class);
         Route::resource('cities',CityController::class);
         Route::resource('ranks',RankController::class);
+        Route::resource('game-user',GameUserController::class);
+
+        Route::get('game-users/selections',[GameUserController::class,'selections'])->name('game-user.selections');
 
     });

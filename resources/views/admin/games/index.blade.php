@@ -39,6 +39,9 @@
                                                     @lang('app.description')
                                                 </th>
                                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                                    @lang('app.ranks')
+                                                </th>
+                                                <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                                     @lang('app.actions')
                                                 </th>
                                             </tr>
@@ -46,12 +49,22 @@
                                             <tbody>
                                             @foreach($games as $game)
                                                 <tr class="odd">
-                                                    <td>{{$game->game_logo ?? ''}}</td>
+                                                    <td>
+                                                        @foreach($game->images as $image)
+                                                            <a href="/storage/uploads/images/original/{{$image->title ?? ''}}" class="table_image_link">
+                                                                <img src="/storage/uploads/images/thumb/{{$image->title ?? ''}}" alt="not available" width="80"/>
+                                                            </a>
+                                                        @endforeach
+                                                    </td>
                                                     <td>{{$game->id ?? ''}}</td>
                                                     <td>{{$game->title ?? ''}}</td>
                                                     <td>{{$game->description ?? ''}}</td>
+                                                    <td>@foreach($game->ranks as $rank)
+                                                            {{$rank->rank_name}};
+                                                        @endforeach
+                                                    </td>
                                                     <td class="d-flex justify-content-around"><a class="btn btn-info"
-                                                           href="{{route('admin.games.edit', $game->id)}}">@lang('app.edit')</a>
+                                                                                                 href="{{route('admin.games.edit', $game->id)}}">@lang('app.edit')</a>
                                                         <form action="{{route('admin.games.destroy', $game->id)}}" method="post">
                                                             @csrf
                                                             @method('DELETE')

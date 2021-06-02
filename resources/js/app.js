@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('../../node_modules/select2/dist/js/select2.full.min')
 
 window.Vue = require('vue').default;
 import BootstrapVue from 'bootstrap-vue';
@@ -12,6 +13,38 @@ Vue.use(BootstrapVue);
 
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
 import {ValidationObserver} from "vee-validate";
+
+/**
+ * select 2 logic
+ */
+$(document).ready(function() {
+    $('.select2').select2({
+        closeOnSelect: false
+    });
+    $('.js-example-basic-single').select2();
+});
+
+$('.remove_image').click(function(){
+    $(this).closest('.image_block').remove();
+});
+
+import {getSelections} from "./script";
+
+
+
+window.App = {
+    getSelections: (route, target, modelId) => getSelections(route, target, modelId)
+};
+
+let route = "{{route('admin.game-user.selections')}}",
+    parent = $('#game'),
+    target = $('#rank');
+parent.on('change.select2', function () {
+    let modelId = $(this).val();
+    target.select2().val(null)
+    App.getSelections(route, target, modelId);
+});
+parent.trigger('change');
 
 
 /**

@@ -12,4 +12,9 @@ class Rank extends Model
     protected $fillable = [
         'rank_name',
     ];
+
+    public function games()
+    {
+        return $this->belongsToMany(Game::class);
+    }
 }

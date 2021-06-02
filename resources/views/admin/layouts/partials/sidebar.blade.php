@@ -30,8 +30,8 @@
             </a>
         </li>
         <li>
-            <a href="" class="nav-link text-white">
-                Game Relations
+            <a href="{{ route('admin.game-user.index') }}" class="nav-link text-white">
+                Users Games
             </a>
         </li>
     </ul>

@@ -28,6 +28,7 @@ class StoreUserRequest extends FormRequest
             'first_name' => 'required|max:20',
             'email' => 'required|email|unique:users,email,' . ($this->route('user')->id ?? ''),
             'password' => 'required|min:6',
+//            'avatar_logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ];
     }
 }

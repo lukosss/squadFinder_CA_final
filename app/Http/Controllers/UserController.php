@@ -6,7 +6,6 @@ use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -17,7 +16,7 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $users = User::with('role')->get();
+        $users = User::with(['role', 'images'])->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -72,7 +71,7 @@ class UserController extends Controller
      */
     public function update(StoreUserRequest $request, User $user): RedirectResponse
     {
-        $user->fill($request->all())->save();
+        $user->createUser($request);
         return redirect()->route('admin.users.index');
     }
 

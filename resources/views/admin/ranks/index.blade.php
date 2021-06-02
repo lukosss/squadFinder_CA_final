@@ -32,6 +32,9 @@
                                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                                     @lang('app.rank_name')
                                                 </th>
+                                                <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                                    @lang('app.actions')
+                                                </th>
                                             </tr>
                                             </thead>
                                             <tbody>

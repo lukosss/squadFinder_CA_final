@@ -42,6 +42,9 @@
                                                     @lang('app.email')
                                                 </th>
                                                 <th class="sorting" tabindex="0" rowspan="1" colspan="1">
+                                                    @lang('app.image')
+                                                </th>
+                                                <th class="sorting" tabindex="0" rowspan="1" colspan="1">
                                                     @lang('app.actions')
                                                 </th>
                                             </tr>
@@ -54,6 +57,13 @@
                                                     <td>{{$user->role->role_name ?? ''}}</td>
                                                     <td>{{$user->first_name ?? ''}}</td>
                                                     <td>{{$user->email ?? ''}}</td>
+                                                    <td>
+                                                        @foreach($user->images as $image)
+                                                            <a href="/storage/uploads/images/original/{{$image->title ?? ''}}" class="table_image_link">
+                                                                <img src="/storage/uploads/images/thumb/{{$image->title ?? ''}}" alt="not available" width="80"/>
+                                                            </a>
+                                                        @endforeach
+                                                    </td>
                                                     <td class="d-flex justify-content-around"><a class="btn btn-info"
                                                            href="{{route('admin.users.edit', $user->id)}}">@lang('app.edit')</a>
                                                         <form action="{{route('admin.users.destroy', $user->id)}}" method="post">

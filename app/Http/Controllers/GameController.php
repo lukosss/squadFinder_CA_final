@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\Rank;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class GameController extends Controller
      */
     public function index(): View
     {
-        $games = Game::get();
+        $games = Game::with('ranks', 'images')->get();
         return view('admin.games.index', compact('games'));
     }
 
@@ -60,8 +61,9 @@ class GameController extends Controller
      */
     public function edit(Game $game): View
     {
-        $model = $game;
-        return view('admin.games.edit', compact('model'));
+        $model = $game->load('ranks');
+        $ranks = Rank::get();
+        return view('admin.games.edit', compact('model','ranks'));
     }
 
     /**
@@ -73,7 +75,8 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game): RedirectResponse
     {
-        $game->fill($request->all())->save();
+        $game->updateGames($request);
+        $game->createGame($request);
         return redirect()->route('admin.games.index');
     }
 

@@ -22,7 +22,7 @@
                             <h3 class="card-title">@lang('app.new_entry')</h3>
                         </div>
 
-                        <form action="{{$route}}" method="POST">
+                        <form action="{{$route}}" method="POST" enctype="multipart/form-data">
 
                             @if($model->exists)
                                 @method('PUT')
@@ -44,9 +44,36 @@
                                 </div>
 
                                 <div class="form-group col-4">
-                                    <label for="logo">@lang('app.logo')</label>
-                                    <input type="email" class="form-control" name="logo" id="logo"
-                                           value="{{$model->game_logo ?? ''}}" placeholder="@lang('app.enter_logo')">
+                                    <div class="image_container">
+                                        @foreach($model->images as $image)
+                                            <div class="image_block">
+                                                <span class="remove_image"><i class="fas fa-window-close">x</i></span>
+                                                <a href="/storage/uploads/images/original/{{$image->title ?? ''}}">
+                                                    <img src="/storage/uploads/images/thumb/{{$image->title ?? ''}}" alt="not available" width="80"/>
+                                                </a>
+                                                <input type="hidden" name="old_images[]" class="images_input" value="{{$image->title}}">
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <input multiple type="file" name="images[]" class="images_input" id="user_images">
+                                    <label class="images" for="images">@lang('app.select_image')</label>
+                                    <div id="image_display">
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="gameRank">@lang('app.game_rank')</label>
+                                    <select multiple class="select2" name="ranks[]" id="ranks"
+                                            data-placeholder="select game ranks" style="width: 100%;">
+                                        <option disabled selected> ------- </option>
+                                        @foreach($ranks as $rank)
+                                            <option
+                                                {{$model->ranks->contains($rank->id) ? 'selected=selected' : ''}} value="{{$rank->id}}">
+                                                {{$rank->rank_name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                             </div>

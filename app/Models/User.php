@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 
 class User extends Authenticatable
@@ -70,5 +73,29 @@ class User extends Authenticatable
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function images(): BelongsToMany
+    {
+        return $this->belongsToMany(Image::class);
+    }
+
+    /**
+     * @param $request
+     * @throws Throwable
+     */
+    public function createUser($request)
+    {
+        DB::transaction(function () use ($request) {
+            //create user
+            $this->fill($request->all())->save();
+            //get image ids
+            $imageIds = Image::handleImageInsert($request);
+            //sync images
+            $this->images()->sync($imageIds);
+        });
     }
 }

@@ -14,7 +14,6 @@ class CreateGameRankTable extends Migration
     public function up()
     {
         Schema::create('game_rank', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('game_id')->constrained('games', 'id');
             $table->foreignId('rank_id')->constrained('ranks', 'id');
             $table->timestamps();

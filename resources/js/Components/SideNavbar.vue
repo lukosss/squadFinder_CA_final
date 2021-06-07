@@ -16,13 +16,13 @@
                 </router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link text-white" to="/games">
+                <router-link class="nav-link text-white" to="/my-games">
                     My games
                 </router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link text-white" to="/games">
-                    Available games
+                    Add games
                 </router-link>
             </li>
         </ul>

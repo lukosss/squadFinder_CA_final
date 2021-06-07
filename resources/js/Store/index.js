@@ -5,6 +5,7 @@ import profileModule from './profile';
 import gamesModule from './gamesList';
 import dashboardModule from './dashboard';
 import squadsModule from './squadList';
+import myGamesModule from './myGames';
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ const store = new Vuex.Store({
         games: gamesModule,
         dashboard: dashboardModule,
         squads: squadsModule,
+        myGames: myGamesModule,
     },
 });
 

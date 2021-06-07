@@ -57,6 +57,15 @@ class API {
         }
     }
 
+    static async getMySelectedGames() {
+        try {
+            const { data } = await axios.get(`${this.domain}/api/selected-games/my-games`);
+            return data;
+        } catch (err) {
+            throw err.message;
+        }
+    }
+
 }
 
 export default API;

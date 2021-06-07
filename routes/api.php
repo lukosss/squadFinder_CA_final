@@ -22,11 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+//User
 Route::get('/users', [DashboardController::class, 'index']);
 Route::prefix('/user')->group(function () {
     Route::get('/me', [ProfileController::class, 'show'])->middleware('auth:sanctum');
-
     Route::post('/store', [UserController::class, 'store']);
     Route::patch('/{id}', [ProfileController::class, 'update'])->middleware('auth:sanctum');
     Route::delete('/{id}', [UserController::class, 'destroy']);
@@ -39,4 +38,6 @@ Route::get('/cities', [ProfileController::class, 'getCities']);
 Route::get('/games', [GameController::class, 'index']);
 Route::get('/games/{id}', [GameController::class, 'show']);
 
+//Assigned games
 Route::get('/selected-games', [DashboardController::class, 'indexSelected']);
+Route::get('/selected-games/my-games', [DashboardController::class, 'indexMySelected'])->middleware('auth:sanctum');

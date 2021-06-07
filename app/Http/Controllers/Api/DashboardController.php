@@ -31,6 +31,15 @@ class DashboardController extends Controller
     }
 
     /**
+     * @return Response
+     */
+    public function indexMySelected(): Response
+    {
+        $userId = auth('sanctum')->user()->id;
+        return response(GameUser::with(['game', 'rank', 'user'])->where('user_id', $userId)->get());
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

@@ -29,6 +29,16 @@ const routes = [
         name: 'SquadsList',
         component: () => import('../Pages/SquadList.vue'),
     },
+    {
+        path: '/my-games',
+        name: 'MyGames',
+        component: () => import('../Pages/MyGames.vue'),
+    },
+    {
+        path: '/my-games/edit',
+        name: 'MyGamesEdit',
+        component: () => import('../Pages/EditGameInfo.vue'),
+    },
 ];
 
 const router = new VueRouter({

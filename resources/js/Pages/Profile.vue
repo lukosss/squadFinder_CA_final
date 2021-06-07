@@ -3,7 +3,7 @@
         <b-card title="Your Profile" v-if="loader === true" class="text-center" shadow="true">
             <b-spinner variant="primary" v-show="loader" label="Loading..."></b-spinner>
         </b-card>
-        <b-card title="Your Profile"v-else shadow="true" class="mb-3" style="width: 120%;">
+        <b-card title="Your Profile" v-else shadow="true" class="mb-3" style="width: 120%;">
         <b-form @submit.prevent="handleSubmit()">
             <div class="d-flex justify-content-around">
                 <div>

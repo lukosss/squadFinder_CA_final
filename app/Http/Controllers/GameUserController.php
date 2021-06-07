@@ -95,7 +95,7 @@ class GameUserController extends Controller
         $term = $request->searchTerm;
 
         $ranks = Rank::with('games')->whereHas('games', function ($query) use ($gameId) {
-            $query->where('game.id', $gameId);
+            $query->where('games.id', $gameId);
         })->where(function ($query) use ($term) {
             return $term ? $query->where('title', 'like', $term . '%') : $query;
         })->get();

@@ -70,19 +70,19 @@
 
                                 <div class="form-group col-4">
                                     <label for="rank">@lang('app.game')</label>
-                                    <select class="select2" name="rank_id" id="rank"
+                                    <select class="select2 select2spec" name="game_id" id="game"
                                             data-placeholder="select game" style="width: 100%;">
-                                        @foreach($ranks as $rank)
+                                        @foreach($games as $game)
                                             <option
-                                                {{($model->rank->id ?? '') == $rank->id ? 'selected=selected' : ''}} value="{{$rank->id}}">
-                                                {{$rank->rank_name}}
+                                                {{($model->game->id ?? '') == $game->id ? 'selected=selected' : ''}} value="{{$game->id}}">
+                                                {{$game->title}}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="game">@lang('app.rank')</label>
-                                    <select class="select2" name="game_id" id="game" data-placeholder="select rank" style="width: 100%;"></select>
+                                    <select class="select2" name="rank_id" id="rank" data-placeholder="select rank" style="width: 100%;"></select>
                                 </div>
 
                                 <div class="form-group col-4">

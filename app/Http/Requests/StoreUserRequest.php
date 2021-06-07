@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class StoreUserRequest extends FormRequest
 {
@@ -24,10 +26,14 @@ class StoreUserRequest extends FormRequest
      */
     public function rules()
     {
+
+        $userId = auth('sanctum')->user()->id;
+
         return [
+
             'first_name' => 'required|max:20',
-            'email' => 'required|email|unique:users,email,' . ($this->route('user')->id ?? ''),
-            'password' => 'required|min:6',
+            'email' => 'required|email|unique:users,email,' . ($userId ?? ''),
+            'password' => 'sometimes|string|min:6',
 //            'avatar_logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ];
     }

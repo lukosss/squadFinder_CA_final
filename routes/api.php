@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\GameController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,10 +23,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/users', [UserController::class, 'index']);
+Route::get('/users', [DashboardController::class, 'index']);
 Route::prefix('/user')->group(function () {
-    Route::get('/me', [UserController::class, 'show']);
+    Route::get('/me', [ProfileController::class, 'show'])->middleware('auth:sanctum');
+
     Route::post('/store', [UserController::class, 'store']);
-    Route::put('/{id}', [UserController::class, 'update']);
+    Route::patch('/{id}', [ProfileController::class, 'update'])->middleware('auth:sanctum');
     Route::delete('/{id}', [UserController::class, 'destroy']);
 });
+
+//Cities
+Route::get('/cities', [ProfileController::class, 'getCities']);
+
+//Games
+Route::get('/games', [GameController::class, 'index']);
+Route::get('/games/{id}', [GameController::class, 'show']);
+
+Route::get('/selected-games', [DashboardController::class, 'indexSelected']);

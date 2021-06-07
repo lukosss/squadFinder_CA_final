@@ -24,6 +24,11 @@ const routes = [
         name: 'GamesList',
         component: () => import('../Pages/GamesList.vue'),
     },
+    {
+        path: '/squads',
+        name: 'SquadsList',
+        component: () => import('../Pages/SquadList.vue'),
+    },
 ];
 
 const router = new VueRouter({

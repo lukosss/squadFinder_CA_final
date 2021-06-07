@@ -27,8 +27,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/loginFront', [LoginControllerFront::class, 'authenticate']);
+Route::post('/registerFront', [LoginControllerFront::class, 'register']);
 
 Route::prefix('admin')
     ->middleware('auth')

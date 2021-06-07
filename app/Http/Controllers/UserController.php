@@ -49,7 +49,8 @@ class UserController extends Controller
      */
     public function show()
     {
-        return User::where('id', 1)->get();
+        $userId = auth('sanctum')->user()->id;
+        return User::where('id', $userId)->get();
     }
 
 

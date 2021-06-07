@@ -5,7 +5,7 @@
         <b-modal id="modal-2" title="Register">
             <div>
                 <ValidationObserver v-slot="{handleSubmit}">
-                    <b-form id="registerForm" @submit="handleSubmit(onSubmit)">
+                    <b-form id="registerForm" @submit.prevent="handleSubmit(onSubmit)">
                         <b-form-group
                             id="input-group-1"
                             label="Name:"
@@ -13,8 +13,9 @@
                         >
                             <b-form-input
                                 id="input-1"
-                                v-model="form.name"
+                                v-model="form.first_name"
                                 type="text"
+                                name="first_name"
                                 placeholder="Enter Your Name"
                                 required
                             ></b-form-input>
@@ -30,6 +31,7 @@
                                     id="input-2"
                                     v-model="form.email"
                                     type="email"
+                                    name="email"
                                     placeholder="Enter email"
                                     required
                                 ></b-form-input>
@@ -63,6 +65,9 @@
                         </ValidationProvider>
                     </b-form>
                 </ValidationObserver>
+                <b-alert v-model="showDismissibleAlert" variant="warning" dismissible>
+                    Registration successful. You can now log in.
+                </b-alert>
             </div>
             <template #modal-footer>
                 <b-button type="submit" form="registerForm" variant="primary">Submit</b-button>
@@ -77,8 +82,9 @@ export default {
     name: "Register",
     data() {
         return {
+            showDismissibleAlert: false,
             form: {
-                name: '',
+                first_name: '',
                 email: '',
                 password: '',
                 confirmPassword: ''
@@ -86,18 +92,21 @@ export default {
         }
     },
     methods: {
-        onSubmit() {
-            axios.post('/user', {
-                name: this.form.name,
+        async onSubmit() {
+
+            await axios.post('/registerFront', {
+                first_name: this.form.first_name,
                 email: this.form.email,
-                password: this.form.password
+                password: this.form.password,
+                password_confirmation: this.form.confirmPassword,
             })
                 .then(function (response) {
-                    return true
+                    console.log(response);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+            this.showDismissibleAlert = true;
         },
 
     }

@@ -11,28 +11,18 @@
                 </router-link>
             </li>
             <li class="nav-item">
-                <router-link class="nav-link text-white" to="/games">
-                    Games List
+                <router-link class="nav-link text-white" to="/squads">
+                    Find Squadmates
                 </router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link text-white" to="/games">
-                    Games List
+                    My games
                 </router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link text-white" to="/games">
-                    Games List
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link text-white" to="/games">
-                    Games List
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link text-white" to="/games">
-                    Games List
+                    Available games
                 </router-link>
             </li>
         </ul>

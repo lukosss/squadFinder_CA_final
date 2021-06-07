@@ -12,11 +12,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
+use Laravel\Sanctum\HasApiTokens;
+
 
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -30,6 +32,7 @@ class User extends Authenticatable
         'password',
         'role_id',
         'display_name',
+        'city_id',
         'bio',
         'avatar_logo',
         'discord_username',
@@ -76,6 +79,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    /**
      * @return BelongsToMany
      */
     public function images(): BelongsToMany
@@ -92,6 +103,23 @@ class User extends Authenticatable
         DB::transaction(function () use ($request) {
             //create user
             $this->fill($request->all())->save();
+            //get image ids
+            $imageIds = Image::handleImageInsert($request);
+            //sync images
+            $this->images()->sync($imageIds);
+        });
+    }
+
+    /**
+     * @param $request
+     * @throws Throwable
+     */
+    public function updateUser($request)
+    {
+        DB::transaction(function () use ($request) {
+            //create user
+
+            $this->fill($request->all())->update();
             //get image ids
             $imageIds = Image::handleImageInsert($request);
             //sync images

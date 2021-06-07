@@ -13,6 +13,11 @@ Vue.use(BootstrapVue);
 
 import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
 import {ValidationObserver} from "vee-validate";
+import {getSelections} from "./script";
+
+window.App = {
+    getSelections: (route, target, modelId) => getSelections(route, target, modelId)
+};
 
 /**
  * select 2 logic
@@ -22,30 +27,26 @@ $(document).ready(function() {
         closeOnSelect: false
     });
     $('.js-example-basic-single').select2();
-});
+
 
 $('.remove_image').click(function(){
     $(this).closest('.image_block').remove();
 });
 
-import {getSelections} from "./script";
 
-
-
-window.App = {
-    getSelections: (route, target, modelId) => getSelections(route, target, modelId)
-};
-
-let route = "{{route('admin.game-user.selections')}}",
+let
     parent = $('#game'),
     target = $('#rank');
 parent.on('change.select2', function () {
-    let modelId = $(this).val();
+
+    let modelId = $(this).val(),
+    route = "http://127.0.0.1:8000/admin/game-users/selections";
+    console.log(modelId);
     target.select2().val(null)
     App.getSelections(route, target, modelId);
 });
 parent.trigger('change');
-
+});
 
 /**
  * The following block of code may be used to automatically register your

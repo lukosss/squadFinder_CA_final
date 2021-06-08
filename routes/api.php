@@ -41,3 +41,4 @@ Route::get('/games/{id}', [GameController::class, 'show']);
 //Assigned games
 Route::get('/selected-games', [DashboardController::class, 'indexSelected']);
 Route::get('/selected-games/my-games', [DashboardController::class, 'indexMySelected'])->middleware('auth:sanctum');
+Route::patch('/selected-games/my-games/{id}', [DashboardController::class, 'update'])->middleware('auth:sanctum');

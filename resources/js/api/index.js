@@ -66,6 +66,15 @@ class API {
         }
     }
 
+    static async patchGameSelection({id, ...body}) {
+        try {
+            await axios.patch(`${this.domain}/api/selected-games/my-games/${id}`, body);
+            return true;
+        } catch (err) {
+            throw err.message;
+        }
+    }
+
 }
 
 export default API;

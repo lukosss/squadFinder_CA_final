@@ -24,7 +24,7 @@ class StoreUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
 
         $userId = auth('sanctum')->user()->id;
@@ -32,9 +32,8 @@ class StoreUserRequest extends FormRequest
         return [
 
             'first_name' => 'required|max:20',
-            'email' => 'required|email|unique:users,email,' . ($userId ?? ''),
+            'email' => 'required|email|unique:users,email,' . ($this->route('user')->id ?? $userId),
             'password' => 'sometimes|string|min:6',
-//            'avatar_logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ];
     }
 }

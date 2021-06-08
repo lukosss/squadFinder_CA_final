@@ -118,10 +118,10 @@ class User extends Authenticatable
     {
         DB::transaction(function () use ($request) {
             //create user
-
+            dd($request);
             $this->fill($request->all())->update();
             //get image ids
-            $imageIds = Image::handleImageInsert($request);
+                $imageIds = Image::handleImageInsert($request);
             //sync images
             $this->images()->sync($imageIds);
         });

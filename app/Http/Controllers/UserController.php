@@ -45,12 +45,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function show()
     {
-        $userId = auth('sanctum')->user()->id;
-        return User::where('id', $userId)->get();
+        //
     }
 
 

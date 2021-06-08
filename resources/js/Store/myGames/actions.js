@@ -19,6 +19,18 @@ export default {
         }
     },
 
+    async updateGameInfo({ commit, dispatch, state }, formData) {
+        try {
+            await API.patchGameSelection({
+                ...formData,
+                id: state.editedGameId,
+            });
+            dispatch('getMySelectedGames');
+        } catch (errMsg) {
+            commit('SAVE_ERROR', errMsg);
+        }
+    },
+
     setEditedGameId({ commit }, id) {
         commit('SET_EDITED_GAME', id);
     },

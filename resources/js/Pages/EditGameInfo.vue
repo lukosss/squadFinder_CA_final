@@ -36,7 +36,7 @@
                 </b-alert>
 
                 <div class="text-center mt-3">
-                    <b-button @click="logConsole" variant="primary">
+                    <b-button type="submit" variant="primary">
                         Save
                     </b-button>
                 </div>
@@ -53,7 +53,6 @@ export default {
     name: "EditGameInfo",
     data() {
         return {
-            editedId: this.selectedGameIdEdit,
             ingame_name: '',
             comment: '',
             rank_id: null,
@@ -62,10 +61,18 @@ export default {
         };
     },
     methods: {
-        ...mapActions('myGames', ['setEditedGameId', 'getMySelectedGames', 'setEditedGameId', 'setGameId']),
+        ...mapActions('myGames', ['setEditedGameId', 'getMySelectedGames', 'setEditedGameId', 'setGameId', 'updateGameInfo']),
         logConsole() {
             console.log(this.selectedGameForEditing.game_id);
             console.log(this.getRanks.ranks);
+        },
+        handleSubmit() {
+            this.updateGameInfo({
+                ingame_name: this.ingame_name,
+                comment: this.comment,
+                rank_id: this.rank_id,
+            })
+            this.showDismissibleAlertMessage = true;
         },
     },
     mounted() {

@@ -99,14 +99,15 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param Game $game
-     * @return RedirectResponse
+     * @param $id
+     * @return Response
      */
-    public function update(Request $request, Game $game): RedirectResponse
+    public function update(Request $request, $id): Response
     {
-        $game->updateGames($request);
-        $game->createGame($request);
-        return redirect()->route('admin.games.index');
+        $gameUserId = $id;
+        $gameUser = GameUser::findOrFail($gameUserId);
+        $gameUser->fill($request->all())->save();
+        return response(['status'=>'ok','message'=>'Updated successfully']);
     }
 
     /**

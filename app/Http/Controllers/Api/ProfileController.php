@@ -63,7 +63,7 @@ class ProfileController extends Controller
     public function show()
     {
         $userId = auth('sanctum')->user()->id;
-        return User::where('id', $userId)->get();
+        return User::where('id', $userId)->with('role','images')->get();
     }
 
 
@@ -81,7 +81,6 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param User $user
      * @return Response
      */
     public function update(Request $request): Response

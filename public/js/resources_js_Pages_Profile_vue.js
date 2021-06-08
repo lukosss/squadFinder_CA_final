@@ -137,6 +137,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Profile",
@@ -156,8 +160,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       origin_username: '',
       selected_city: null,
       loader: true,
-      file1: '',
-      showDismissibleAlertMessage: false
+      file1: null,
+      showDismissibleAlertMessage: false,
+      domain: 'http://127.0.0.1:8000/'
     };
   },
   watch: {
@@ -174,6 +179,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.epic_username = newUser.epic_username;
         this.origin_username = newUser.origin_username;
         this.selected_city = newUser.city_id;
+
+        if (newUser.images.length > 0) {
+          this.file1 = newUser.images[0].title;
+        }
+
         this.loader = false;
       } else {
         this.first_name = '';
@@ -188,26 +198,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.origin_username = '';
         this.selected_city = null;
         this.loader = false;
+        this.file1 = null;
       }
     }
   },
   methods: _objectSpread({
     logConsole: function logConsole() {
-      console.log(this.userFirstName);
+      console.log(this.file1);
     },
     handleSubmit: function handleSubmit() {
-      this.updateUser({
-        first_name: this.first_name,
-        email: this.email,
-        last_name: this.last_name,
-        display_name: this.display_name,
-        bio: this.bio,
-        discord_username: this.discord_username,
-        steam_username: this.steam_username,
-        epic_username: this.epic_username,
-        origin_username: this.origin_username,
-        city_id: this.selected_city
-      });
+      if (this.file1 !== null || this.userFirstName.images[0].title !== this.file1[0].name) {
+        this.updateUser({
+          first_name: this.first_name,
+          email: this.email,
+          last_name: this.last_name,
+          display_name: this.display_name,
+          bio: this.bio,
+          discord_username: this.discord_username,
+          steam_username: this.steam_username,
+          epic_username: this.epic_username,
+          origin_username: this.origin_username,
+          city_id: this.selected_city,
+          images: this.file1
+        });
+      } else {
+        this.updateUser({
+          first_name: this.first_name,
+          email: this.email,
+          last_name: this.last_name,
+          display_name: this.display_name,
+          bio: this.bio,
+          discord_username: this.discord_username,
+          steam_username: this.steam_username,
+          epic_username: this.epic_username,
+          origin_username: this.origin_username,
+          city_id: this.selected_city
+        });
+      }
+
       this.showDismissibleAlertMessage = true;
     }
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('profile', ['getUser', 'updateUser', 'getCities'])),
@@ -240,7 +268,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.vertical-line[data-v-1bdc34e0]{\n    display: inline-block;\n    border-left: 1px solid #ccc;\n    margin: 0 10px;\n    height: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.vertical-line[data-v-1bdc34e0] {\n    display: inline-block;\n    border-left: 1px solid #ccc;\n    margin: 0 10px;\n    height: auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -517,7 +545,13 @@ var render = function() {
                                   return _c(
                                     "b-form-select-option",
                                     { key: city.id, attrs: { value: city.id } },
-                                    [_vm._v(_vm._s(city.city_name))]
+                                    [
+                                      _vm._v(
+                                        "\n                                " +
+                                          _vm._s(city.city_name) +
+                                          "\n                            "
+                                      )
+                                    ]
                                   )
                                 })
                               ],
@@ -648,6 +682,56 @@ var render = function() {
                       1
                     )
                   ]),
+                  _vm._v(" "),
+                  _c(
+                    "b-form-group",
+                    { attrs: { label: "Profile Logo", "label-for": "images" } },
+                    [
+                      _c("b-form-file", {
+                        attrs: {
+                          multiple: "",
+                          state: Boolean(_vm.file1),
+                          id: "images",
+                          placeholder: "Choose a file or drop it here...",
+                          "drop-placeholder": "Drop file here..."
+                        },
+                        model: {
+                          value: _vm.file1,
+                          callback: function($$v) {
+                            _vm.file1 = $$v
+                          },
+                          expression: "file1"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "mt-3" }, [
+                        _vm._v(
+                          "Selected file: " +
+                            _vm._s(_vm.file1 ? _vm.file1[0].name : "")
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm.file1 !== null
+                        ? _c(
+                            "div",
+                            { staticClass: "mt-3" },
+                            [
+                              _vm._v("Current image: "),
+                              _c("b-img", {
+                                attrs: {
+                                  src:
+                                    _vm.domain +
+                                    "storage/uploads/images/thumb/" +
+                                    _vm.file1[0].name
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "b-alert",

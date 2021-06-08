@@ -18,10 +18,14 @@
 
                 <template #footer>
                     <div class="d-flex justify-content-center">
-                    <b-button href="#" variant="primary">Add game to your profile</b-button>
+                        <router-link to="/my-games/add">
+                    <b-button variant="primary" @click="setGameId(game.id)" :disabled="(checkIfAlreadyExists(game.id))">Add game to your profile</b-button>
+                        </router-link>
                     </div>
                 </template>
             </b-card>
+
+            <div hidden>{{this.selectedGamesList.length}}</div>
         </div>
     </div>
 </template>
@@ -34,21 +38,42 @@ export default {
     data(){
         return {
             games: [],
-            domain: 'http://127.0.0.1:8000/'
+            domain: 'http://127.0.0.1:8000/',
+            selectedIds: [],
+            addedGameId: null
         }
     },
     methods: {
-        ...mapActions('games', ['getGames']),
+        ...mapActions('games', ['getGames', 'getMySelectedGames', 'setAddedGameId']),
+        getSelectedGamesIds(){
+            for (let i = 0; i < this.selectedGamesList.length; i++) {
+                if(!this.selectedIds.includes(this.selectedGamesList[i].game_id))
+                this.selectedIds.push(this.selectedGamesList[i].game_id);
+            }
+            console.log(this.selectedIds);
+        },
+        checkIfAlreadyExists(gameId){
+            if(this.selectedIds.includes(gameId)) return true;
+        },
+        setGameId(gameId){
+            this.addedGameId = gameId;
+            this.setAddedGameId(this.addedGameId);
+        },
 
     },
     created: function () {
-        this.getGames()
+        this.getGames();
+        this.getMySelectedGames();
     },
     computed: {
         ...mapGetters('games', {
             gamesList: 'getGamesList',
+            selectedGamesList: 'getMyGamesList',
         }),
     },
+    updated() {
+        this.getSelectedGamesIds();
+    }
 }
 </script>
 

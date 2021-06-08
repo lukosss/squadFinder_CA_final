@@ -39,6 +39,11 @@ const routes = [
         name: 'MyGamesEdit',
         component: () => import('../Pages/EditGameInfo.vue'),
     },
+    {
+        path: '/my-games/add',
+        name: 'MyGamesAdd',
+        component: () => import('../Pages/AddGameInfo.vue'),
+    },
 ];
 
 const router = new VueRouter({

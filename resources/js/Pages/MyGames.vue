@@ -2,7 +2,7 @@
     <div>
         <h2 class="text-center text-white mb-3">My Games</h2>
         <div class="d-flex flex-wrap justify-content-around">
-            <b-card no-body class="overflow-hidden mb-3" style="max-width: 540px;" v-for="game in this.myGames" :key="game.id"
+            <b-card no-body class="overflow-hidden mb-3 mr-2" style="max-width: 540px;" v-for="game in this.myGames" :key="game.id"
             bg-variant="dark" border-variant="primary" text-variant="white">
                 <b-row no-gutters>
                     <b-col md="6">

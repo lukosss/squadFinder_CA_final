@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\GameUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,4 @@ Route::get('/games/{id}', [GameController::class, 'show']);
 Route::get('/selected-games', [DashboardController::class, 'indexSelected']);
 Route::get('/selected-games/my-games', [DashboardController::class, 'indexMySelected'])->middleware('auth:sanctum');
 Route::patch('/selected-games/my-games/{id}', [DashboardController::class, 'update'])->middleware('auth:sanctum');
+Route::post('/selected-games/add-game', [GameUserController::class, 'store'])->middleware('auth:sanctum');

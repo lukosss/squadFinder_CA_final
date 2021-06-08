@@ -75,6 +75,15 @@ class API {
         }
     }
 
+    static async postGameInfo(body) {
+        try {
+            const { data } = await axios.post(`${this.domain}/api/selected-games/add-game`, body);
+            return data;
+        } catch (err) {
+            throw err.message;
+        }
+    }
+
 }
 
 export default API;

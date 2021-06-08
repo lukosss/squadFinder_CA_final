@@ -34,11 +34,27 @@
                 <b-alert v-model="showDismissibleAlertMessage" variant="success" dismissible>
                     Game Saved!
                 </b-alert>
+                <b-alert v-model="showDismissibleAlertMessageDelete" variant="warning" dismissible>
+                    Game Removed!
+                </b-alert>
 
                 <div class="text-center mt-3">
                     <b-button type="submit" variant="primary">
                         Save
                     </b-button>
+                    <b-button v-b-modal.modal-1 variant="warning">
+                        Delete
+                    </b-button>
+
+                    <b-modal id="modal-1" hide-footer title="Remove Game" size="sm">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                        <p class="my-4">Are you sure?</p>
+
+                        <b-button @click="deleteInfo" variant="warning">
+                            Delete
+                        </b-button>
+                        </div>
+                    </b-modal>
                 </div>
             </b-form>
         </b-card>
@@ -58,14 +74,19 @@ export default {
             rank_id: null,
             loader: true,
             showDismissibleAlertMessage: false,
+            showDismissibleAlertMessageDelete: false
         };
     },
     methods: {
-        ...mapActions('myGames', ['setEditedGameId', 'getMySelectedGames', 'setEditedGameId', 'setGameId', 'updateGameInfo']),
-        logConsole() {
-            console.log(this.selectedGameForEditing.game_id);
-            console.log(this.getRanks.ranks);
-        },
+        ...mapActions('myGames', [
+            'setEditedGameId',
+            'getMySelectedGames',
+            'setEditedGameId',
+            'setGameId',
+            'updateGameInfo',
+            'deleteGameInfo',
+            'getUser'
+        ]),
         handleSubmit() {
             this.updateGameInfo({
                 ingame_name: this.ingame_name,
@@ -73,7 +94,16 @@ export default {
                 rank_id: this.rank_id,
             })
             this.showDismissibleAlertMessage = true;
+            this.$router.push({name: 'MyGames'});
         },
+        deleteInfo(){
+            this.deleteGameInfo(this.selectedGameIdEdit);
+            this.showDismissibleAlertMessageDelete = true;
+            this.$router.push({name: 'MyGames'});
+        }
+    },
+    created() {
+        this.getUser();
     },
     mounted() {
         this.setGameId(this.selectedGameForEditing.game_id);
@@ -90,7 +120,8 @@ export default {
             myGames: 'getMyGamesList',
             selectedGameIdEdit: 'getEditedGameId',
             selectedGameForEditing: 'getMySelectedGameForEditing',
-            getRanks: 'getSelectedGameRanks'
+            getRanks: 'getSelectedGameRanks',
+            getUserDetails: 'getUserInfo'
         }),
     }
 }

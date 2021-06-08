@@ -10,5 +10,7 @@ export default {
         .find(({ id }) => id === state.gameId) ?? false,
 
     getEditedGameId: (state) => state.editedGameId,
+
+    getUserInfo: (state) => state.user,
 };
 

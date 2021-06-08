@@ -10,6 +10,15 @@ export default {
         }
     },
 
+    async getUser({commit}) {
+        try {
+            const user = await API.getCurrentUser();
+            commit('SAVE_USER', user);
+        } catch (errMsg) {
+            commit('SAVE_ERROR', errMsg);
+        }
+    },
+
     async getMySelectedGames({ commit }) {
         try {
             const mySelectedGames = await API.getMySelectedGames();
@@ -25,6 +34,15 @@ export default {
                 ...formData,
                 id: state.editedGameId,
             });
+            dispatch('getMySelectedGames');
+        } catch (errMsg) {
+            commit('SAVE_ERROR', errMsg);
+        }
+    },
+
+    async deleteGameInfo({ commit, dispatch }, id) {
+        try {
+            await API.deleteGameInfo(id);
             dispatch('getMySelectedGames');
         } catch (errMsg) {
             commit('SAVE_ERROR', errMsg);

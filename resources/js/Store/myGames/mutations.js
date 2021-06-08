@@ -15,6 +15,10 @@ export default {
         state.gameId = id;
     },
 
+    SAVE_USER(state, user) {
+        state.user = user[0];
+    },
+
     SAVE_ERROR(state, errMsg) {
         state.errMsg = errMsg;
     },

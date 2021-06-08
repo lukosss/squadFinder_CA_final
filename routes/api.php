@@ -44,3 +44,4 @@ Route::get('/selected-games', [DashboardController::class, 'indexSelected']);
 Route::get('/selected-games/my-games', [DashboardController::class, 'indexMySelected'])->middleware('auth:sanctum');
 Route::patch('/selected-games/my-games/{id}', [DashboardController::class, 'update'])->middleware('auth:sanctum');
 Route::post('/selected-games/add-game', [GameUserController::class, 'store'])->middleware('auth:sanctum');
+Route::delete('/selected-games/delete/{id}', [DashboardController::class, 'destroy'])->middleware('auth:sanctum');

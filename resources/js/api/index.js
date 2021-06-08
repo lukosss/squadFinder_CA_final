@@ -84,6 +84,15 @@ class API {
         }
     }
 
+    static async deleteGameInfo(id) {
+        try {
+            await axios.delete(`${this.domain}/api/selected-games/delete/${id}`);
+            return true;
+        } catch (err) {
+            throw err.message;
+        }
+    }
+
 }
 
 export default API;

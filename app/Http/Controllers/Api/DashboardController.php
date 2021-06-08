@@ -42,7 +42,7 @@ class DashboardController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create(): View
     {
@@ -114,13 +114,13 @@ class DashboardController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function destroy(int $id)
+    public function destroy(int $id): Response
     {
-        $game = Game::find($id);
+        $game = GameUser::find($id);
         $game->delete();
 
-        return redirect()->route('admin.games.index');
+        return response(['status'=>'ok','message'=>'Deleted successfully']);
     }
 }

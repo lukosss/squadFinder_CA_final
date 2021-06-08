@@ -53,7 +53,6 @@ export default {
         ...mapActions('myGames', ['getGames', 'getMySelectedGames', 'setEditedGameId']),
         selectEditedGame(id){
             this.setEditedGameId(id)
-            console.log(this.gamesList)
         },
         getImage(id){
             for (let i = 0; i < this.gamesList.length; i++) {

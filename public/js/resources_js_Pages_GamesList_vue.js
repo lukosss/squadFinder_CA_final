@@ -46,22 +46,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "GamesList",
   data: function data() {
     return {
       games: [],
-      domain: 'http://127.0.0.1:8000/'
+      domain: 'http://127.0.0.1:8000/',
+      selectedIds: [],
+      addedGameId: null
     };
   },
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('games', ['getGames'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('games', ['getGames', 'getMySelectedGames', 'setAddedGameId'])), {}, {
+    getSelectedGamesIds: function getSelectedGamesIds() {
+      for (var i = 0; i < this.selectedGamesList.length; i++) {
+        if (!this.selectedIds.includes(this.selectedGamesList[i].game_id)) this.selectedIds.push(this.selectedGamesList[i].game_id);
+      }
+
+      console.log(this.selectedIds);
+    },
+    checkIfAlreadyExists: function checkIfAlreadyExists(gameId) {
+      if (this.selectedIds.includes(gameId)) return true;
+    },
+    setGameId: function setGameId(gameId) {
+      this.addedGameId = gameId;
+      this.setAddedGameId(this.addedGameId);
+    }
+  }),
   created: function created() {
     this.getGames();
+    this.getMySelectedGames();
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('games', {
-    gamesList: 'getGamesList'
-  }))
+    gamesList: 'getGamesList',
+    selectedGamesList: 'getMyGamesList'
+  })),
+  updated: function updated() {
+    this.getSelectedGamesIds();
+  }
 });
 
 /***/ }),
@@ -205,65 +231,90 @@ var render = function() {
     _c(
       "div",
       { staticClass: "d-flex flex-wrap justify-content-around" },
-      _vm._l(_vm.gamesList, function(game) {
-        return _c(
-          "b-card",
-          {
-            key: game.id,
-            staticClass: "mb-3",
-            staticStyle: { "max-width": "20rem" },
-            attrs: {
-              title: game.title,
-              "img-src":
-                _vm.domain +
-                "storage/uploads/images/original/" +
-                (game.images[0] !== undefined
-                  ? game.images[0].title
-                  : "default-game-image.png"),
-              "img-alt": "Image",
-              "img-top": "",
-              tag: "article"
-            },
-            scopedSlots: _vm._u(
-              [
-                {
-                  key: "footer",
-                  fn: function() {
-                    return [
-                      _c(
-                        "div",
-                        { staticClass: "d-flex justify-content-center" },
-                        [
-                          _c(
-                            "b-button",
-                            { attrs: { href: "#", variant: "primary" } },
-                            [_vm._v("Add game to your profile")]
-                          )
-                        ],
-                        1
-                      )
-                    ]
-                  },
-                  proxy: true
-                }
-              ],
-              null,
-              true
-            )
-          },
-          [
-            _c("b-card-text", [
-              _vm._v(
-                "\n                " +
-                  _vm._s(game.description) +
-                  "\n            "
+      [
+        _vm._l(_vm.gamesList, function(game) {
+          return _c(
+            "b-card",
+            {
+              key: game.id,
+              staticClass: "mb-3",
+              staticStyle: { "max-width": "20rem" },
+              attrs: {
+                title: game.title,
+                "img-src":
+                  _vm.domain +
+                  "storage/uploads/images/original/" +
+                  (game.images[0] !== undefined
+                    ? game.images[0].title
+                    : "default-game-image.png"),
+                "img-alt": "Image",
+                "img-top": "",
+                tag: "article"
+              },
+              scopedSlots: _vm._u(
+                [
+                  {
+                    key: "footer",
+                    fn: function() {
+                      return [
+                        _c(
+                          "div",
+                          { staticClass: "d-flex justify-content-center" },
+                          [
+                            _c(
+                              "router-link",
+                              { attrs: { to: "/my-games/add" } },
+                              [
+                                _c(
+                                  "b-button",
+                                  {
+                                    attrs: {
+                                      variant: "primary",
+                                      disabled: _vm.checkIfAlreadyExists(
+                                        game.id
+                                      )
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.setGameId(game.id)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Add game to your profile")]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    },
+                    proxy: true
+                  }
+                ],
+                null,
+                true
               )
-            ])
-          ],
-          1
-        )
-      }),
-      1
+            },
+            [
+              _c("b-card-text", [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(game.description) +
+                    "\n            "
+                )
+              ])
+            ],
+            1
+          )
+        }),
+        _vm._v(" "),
+        _c("div", { attrs: { hidden: "" } }, [
+          _vm._v(_vm._s(this.selectedGamesList.length))
+        ])
+      ],
+      2
     )
   ])
 }

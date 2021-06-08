@@ -70,7 +70,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('myGames', ['getGames', 'getMySelectedGames', 'setEditedGameId'])), {}, {
     selectEditedGame: function selectEditedGame(id) {
       this.setEditedGameId(id);
-      console.log(this.selectedGameIdEdit);
+      console.log(this.gamesList);
+    },
+    getImage: function getImage(id) {
+      for (var i = 0; i < this.gamesList.length; i++) {
+        if (this.gamesList[i].id === id && this.gamesList[i].images[0]) {
+          return this.gamesList[i].images[0].title;
+        } else {
+          return undefined;
+        }
+      }
     }
   }),
   created: function created() {
@@ -230,7 +239,7 @@ var render = function() {
           "b-card",
           {
             key: game.id,
-            staticClass: "overflow-hidden mb-3",
+            staticClass: "overflow-hidden mb-3 mr-2",
             staticStyle: { "max-width": "540px" },
             attrs: {
               "no-body": "",
@@ -246,7 +255,11 @@ var render = function() {
               [
                 _c(
                   "b-col",
-                  { attrs: { md: "6" } },
+                  {
+                    staticClass:
+                      "d-flex justify-content-center align-items-center",
+                    attrs: { md: "6" }
+                  },
                   [
                     _c("b-card-img", {
                       staticClass: "rounded-0",
@@ -254,7 +267,9 @@ var render = function() {
                         src:
                           _vm.domain +
                           "storage/uploads/images/original/" +
-                          "default-game-image.png",
+                          (_vm.getImage(game.game.id) !== undefined
+                            ? _vm.getImage(game.game.id)
+                            : "default-game-image.png"),
                         alt: "Image"
                       }
                     })

@@ -5,8 +5,8 @@
             <b-card no-body class="overflow-hidden mb-3 mr-2" style="max-width: 540px;" v-for="game in this.myGames" :key="game.id"
             bg-variant="dark" border-variant="primary" text-variant="white">
                 <b-row no-gutters>
-                    <b-col md="6">
-                        <b-card-img :src="domain + 'storage/uploads/images/original/' + 'default-game-image.png'" alt="Image" class="rounded-0"></b-card-img>
+                    <b-col md="6" class="d-flex justify-content-center align-items-center">
+                        <b-card-img :src="domain + 'storage/uploads/images/original/' + (getImage(game.game.id) !== undefined ? getImage(game.game.id) : 'default-game-image.png')" alt="Image" class="rounded-0"></b-card-img>
                     </b-col>
                     <b-col md="6">
                         <b-card-body :title="game.game.title">
@@ -53,7 +53,16 @@ export default {
         ...mapActions('myGames', ['getGames', 'getMySelectedGames', 'setEditedGameId']),
         selectEditedGame(id){
             this.setEditedGameId(id)
-            console.log(this.selectedGameIdEdit)
+            console.log(this.gamesList)
+        },
+        getImage(id){
+            for (let i = 0; i < this.gamesList.length; i++) {
+                if(this.gamesList[i].id === id && this.gamesList[i].images[0]){
+                return this.gamesList[i].images[0].title
+                } else {
+                    return undefined
+                }
+            }
         }
     },
     created: function () {

@@ -1,7 +1,8 @@
 <template>
     <div>
         <h2 class="text-center text-white mb-3">Games List</h2>
-        <div class="d-flex flex-wrap justify-content-around">
+        <b-spinner v-if="loader" variant="primary" v-show="loader" label="Loading..."></b-spinner>
+        <div v-else class="d-flex flex-wrap justify-content-around">
             <b-card v-for="game in gamesList" :key="game.id"
                 :title="game.title"
                 :img-src="domain + 'storage/uploads/images/original/' + (game.images[0] !== undefined ? game.images[0].title : 'default-game-image.png')"
@@ -40,7 +41,8 @@ export default {
             games: [],
             domain: 'http://127.0.0.1:8000/',
             selectedIds: [],
-            addedGameId: null
+            addedGameId: null,
+            loader: true,
         }
     },
     methods: {
@@ -50,7 +52,6 @@ export default {
                 if(!this.selectedIds.includes(this.selectedGamesList[i].game_id))
                 this.selectedIds.push(this.selectedGamesList[i].game_id);
             }
-            console.log(this.selectedIds);
         },
         checkIfAlreadyExists(gameId){
             if(this.selectedIds.includes(gameId)) return true;
@@ -64,6 +65,7 @@ export default {
     created: function () {
         this.getGames();
         this.getMySelectedGames();
+        this.loader = false;
     },
     computed: {
         ...mapGetters('games', {

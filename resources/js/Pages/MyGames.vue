@@ -1,7 +1,8 @@
 <template>
     <div>
         <h2 class="text-center text-white mb-3">My Games</h2>
-        <div class="d-flex flex-wrap justify-content-around">
+        <b-spinner v-if="loader" variant="primary" v-show="loader" label="Loading..."></b-spinner>
+        <div v-else class="d-flex flex-wrap justify-content-around">
             <b-card no-body class="overflow-hidden mb-3 mr-2" style="max-width: 540px;" v-for="game in this.myGames" :key="game.id"
             bg-variant="dark" border-variant="primary" text-variant="white">
                 <b-row no-gutters>
@@ -47,6 +48,7 @@ export default {
         return {
             domain: 'http://127.0.0.1:8000/',
             selectedGameId: null,
+            loader: true,
         }
     },
     methods: {
@@ -55,7 +57,7 @@ export default {
             this.setEditedGameId(id)
         },
         getImage(id){
-            for (let i = 0; i < this.gamesList.length; i++) {
+            for(let i = 0; i < this.gamesList.length; i++) {
                 if(this.gamesList[i].id === id && this.gamesList[i].images[0]){
                 return this.gamesList[i].images[0].title
                 } else {
@@ -67,6 +69,9 @@ export default {
     created: function () {
         this.getGames();
         this.getMySelectedGames();
+    },
+    mounted() {
+        this.loader = false;
     },
     computed: {
         ...mapGetters('myGames', {

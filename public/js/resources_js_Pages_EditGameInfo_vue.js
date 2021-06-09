@@ -65,6 +65,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "EditGameInfo",
@@ -74,14 +90,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       comment: '',
       rank_id: null,
       loader: true,
-      showDismissibleAlertMessage: false
+      showDismissibleAlertMessage: false,
+      showDismissibleAlertMessageDelete: false
     };
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('myGames', ['setEditedGameId', 'getMySelectedGames', 'setEditedGameId', 'setGameId', 'updateGameInfo'])), {}, {
-    logConsole: function logConsole() {
-      console.log(this.selectedGameForEditing.game_id);
-      console.log(this.getRanks.ranks);
-    },
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('myGames', ['setEditedGameId', 'getMySelectedGames', 'setEditedGameId', 'setGameId', 'updateGameInfo', 'deleteGameInfo', 'getUser'])), {}, {
     handleSubmit: function handleSubmit() {
       this.updateGameInfo({
         ingame_name: this.ingame_name,
@@ -89,8 +102,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         rank_id: this.rank_id
       });
       this.showDismissibleAlertMessage = true;
+      this.$router.push({
+        name: 'MyGames'
+      });
+    },
+    deleteInfo: function deleteInfo() {
+      this.deleteGameInfo(this.selectedGameIdEdit);
+      this.showDismissibleAlertMessageDelete = true;
+      this.$router.push({
+        name: 'MyGames'
+      });
     }
   }),
+  created: function created() {
+    this.getUser();
+  },
   mounted: function mounted() {
     this.setGameId(this.selectedGameForEditing.game_id);
     var selectedGame = this.selectedGameForEditing;
@@ -104,7 +130,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     myGames: 'getMyGamesList',
     selectedGameIdEdit: 'getEditedGameId',
     selectedGameForEditing: 'getMySelectedGameForEditing',
-    getRanks: 'getSelectedGameRanks'
+    getRanks: 'getSelectedGameRanks',
+    getUserDetails: 'getUserInfo'
   }))
 });
 
@@ -353,6 +380,21 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c(
+                    "b-alert",
+                    {
+                      attrs: { variant: "warning", dismissible: "" },
+                      model: {
+                        value: _vm.showDismissibleAlertMessageDelete,
+                        callback: function($$v) {
+                          _vm.showDismissibleAlertMessageDelete = $$v
+                        },
+                        expression: "showDismissibleAlertMessageDelete"
+                      }
+                    },
+                    [_vm._v("\n                Game Removed!\n            ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
                     "div",
                     { staticClass: "text-center mt-3" },
                     [
@@ -360,6 +402,65 @@ var render = function() {
                         "b-button",
                         { attrs: { type: "submit", variant: "primary" } },
                         [_vm._v("\n                    Save\n                ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-button",
+                        {
+                          directives: [
+                            {
+                              name: "b-modal",
+                              rawName: "v-b-modal.modal-1",
+                              modifiers: { "modal-1": true }
+                            }
+                          ],
+                          attrs: { variant: "warning" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Delete\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-modal",
+                        {
+                          attrs: {
+                            id: "modal-1",
+                            "hide-footer": "",
+                            title: "Remove Game",
+                            size: "sm"
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex flex-column justify-content-center align-items-center"
+                            },
+                            [
+                              _c("p", { staticClass: "my-4" }, [
+                                _vm._v("Are you sure?")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "b-button",
+                                {
+                                  attrs: { variant: "warning" },
+                                  on: { click: _vm.deleteInfo }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        Delete\n                    "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ]
                       )
                     ],
                     1

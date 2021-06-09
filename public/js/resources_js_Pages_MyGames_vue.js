@@ -58,19 +58,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "MyGames",
   data: function data() {
     return {
       domain: 'http://127.0.0.1:8000/',
-      selectedGameId: null
+      selectedGameId: null,
+      loader: true
     };
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('myGames', ['getGames', 'getMySelectedGames', 'setEditedGameId'])), {}, {
     selectEditedGame: function selectEditedGame(id) {
       this.setEditedGameId(id);
-      console.log(this.gamesList);
     },
     getImage: function getImage(id) {
       for (var i = 0; i < this.gamesList.length; i++) {
@@ -85,6 +86,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getGames();
     this.getMySelectedGames();
+  },
+  mounted: function mounted() {
+    this.loader = false;
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('myGames', {
     gamesList: 'getGamesList',
@@ -226,145 +230,167 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h2", { staticClass: "text-center text-white mb-3" }, [
-      _vm._v("My Games")
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "d-flex flex-wrap justify-content-around" },
-      _vm._l(this.myGames, function(game) {
-        return _c(
-          "b-card",
-          {
-            key: game.id,
-            staticClass: "overflow-hidden mb-3 mr-2",
-            staticStyle: { "max-width": "540px" },
-            attrs: {
-              "no-body": "",
-              "bg-variant": "dark",
-              "border-variant": "primary",
-              "text-variant": "white"
-            }
-          },
-          [
-            _c(
-              "b-row",
-              { attrs: { "no-gutters": "" } },
-              [
-                _c(
-                  "b-col",
-                  {
-                    staticClass:
-                      "d-flex justify-content-center align-items-center",
-                    attrs: { md: "6" }
-                  },
-                  [
-                    _c("b-card-img", {
-                      staticClass: "rounded-0",
-                      attrs: {
-                        src:
-                          _vm.domain +
-                          "storage/uploads/images/original/" +
-                          (_vm.getImage(game.game.id) !== undefined
-                            ? _vm.getImage(game.game.id)
-                            : "default-game-image.png"),
-                        alt: "Image"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-col",
-                  { attrs: { md: "6" } },
-                  [
-                    _c(
-                      "b-card-body",
-                      { attrs: { title: game.game.title } },
-                      [
-                        _c("b-dropdown-divider", {
-                          staticStyle: { "list-style-type": "none" }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "b-card-text",
-                          {
-                            staticClass:
-                              "d-flex justify-content-center flex-column"
-                          },
-                          [
-                            _c("ul", { staticClass: "pl-3" }, [
-                              _c("li", [
-                                _vm._v(
-                                  "\n                        Ingame Name: " +
-                                    _vm._s(game.ingame_name) +
-                                    "\n                    "
-                                )
-                              ]),
+  return _c(
+    "div",
+    [
+      _c("h2", { staticClass: "text-center text-white mb-3" }, [
+        _vm._v("My Games")
+      ]),
+      _vm._v(" "),
+      _vm.loader
+        ? _c("b-spinner", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.loader,
+                expression: "loader"
+              }
+            ],
+            attrs: { variant: "primary", label: "Loading..." }
+          })
+        : _c(
+            "div",
+            { staticClass: "d-flex flex-wrap justify-content-around" },
+            _vm._l(this.myGames, function(game) {
+              return _c(
+                "b-card",
+                {
+                  key: game.id,
+                  staticClass: "overflow-hidden mb-3 mr-2",
+                  staticStyle: { "max-width": "540px" },
+                  attrs: {
+                    "no-body": "",
+                    "bg-variant": "dark",
+                    "border-variant": "primary",
+                    "text-variant": "white"
+                  }
+                },
+                [
+                  _c(
+                    "b-row",
+                    { attrs: { "no-gutters": "" } },
+                    [
+                      _c(
+                        "b-col",
+                        {
+                          staticClass:
+                            "d-flex justify-content-center align-items-center",
+                          attrs: { md: "6" }
+                        },
+                        [
+                          _c("b-card-img", {
+                            staticClass: "rounded-0",
+                            attrs: {
+                              src:
+                                _vm.domain +
+                                "storage/uploads/images/original/" +
+                                (_vm.getImage(game.game.id) !== undefined
+                                  ? _vm.getImage(game.game.id)
+                                  : "default-game-image.png"),
+                              alt: "Image"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-col",
+                        { attrs: { md: "6" } },
+                        [
+                          _c(
+                            "b-card-body",
+                            { attrs: { title: game.game.title } },
+                            [
+                              _c("b-dropdown-divider", {
+                                staticStyle: { "list-style-type": "none" }
+                              }),
                               _vm._v(" "),
-                              _c("li", [
-                                _vm._v(
-                                  "\n                        Rank: " +
-                                    _vm._s(game.rank.rank_name) +
-                                    "\n                    "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("li", [
-                                _vm._v(
-                                  "\n                        Comment: " +
-                                    _vm._s(game.comment) +
-                                    "\n                    "
-                                )
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "d-flex justify-content-center" },
-                              [
-                                _c(
-                                  "router-link",
-                                  { attrs: { to: "/my-games/edit" } },
-                                  [
-                                    _c(
-                                      "p",
-                                      {
-                                        staticClass: "btn btn-primary mb-0",
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.selectEditedGame(game.id)
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Edit")]
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      }),
-      1
-    )
-  ])
+                              _c(
+                                "b-card-text",
+                                {
+                                  staticClass:
+                                    "d-flex justify-content-center flex-column"
+                                },
+                                [
+                                  _c("ul", { staticClass: "pl-3" }, [
+                                    _c("li", [
+                                      _vm._v(
+                                        "\n                        Ingame Name: " +
+                                          _vm._s(game.ingame_name) +
+                                          "\n                    "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("li", [
+                                      _vm._v(
+                                        "\n                        Rank: " +
+                                          _vm._s(game.rank.rank_name) +
+                                          "\n                    "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("li", [
+                                      _vm._v(
+                                        "\n                        Comment: " +
+                                          _vm._s(game.comment) +
+                                          "\n                    "
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "d-flex justify-content-center"
+                                    },
+                                    [
+                                      _c(
+                                        "router-link",
+                                        { attrs: { to: "/my-games/edit" } },
+                                        [
+                                          _c(
+                                            "p",
+                                            {
+                                              staticClass:
+                                                "btn btn-primary mb-0",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.selectEditedGame(
+                                                    game.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Edit")]
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

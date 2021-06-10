@@ -23,7 +23,7 @@ use App\Http\Controllers\LoginControllerFront;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -35,7 +35,7 @@ Route::post('/registerFront', [LoginControllerFront::class, 'register']);
 
 // Admin panel
 Route::prefix('admin')
-    ->middleware('auth')
+    ->middleware('role:admin')
     ->name('admin.')->group(function(){
         Route::get('/', [HomeController::class, 'index']);
         Route::get('home', [HomeController::class, 'index']);
@@ -44,7 +44,5 @@ Route::prefix('admin')
         Route::resource('cities',CityController::class);
         Route::resource('ranks',RankController::class);
         Route::resource('game-user',GameUserController::class);
-
         Route::get('game-users/selections',[GameUserController::class,'selections'])->name('game-user.selections');
-
     });

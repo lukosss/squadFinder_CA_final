@@ -70,6 +70,21 @@ class User extends Authenticatable
     ];
 
     /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        if($this->role_id === 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
      * @return BelongsTo
      */
     public function role(): BelongsTo

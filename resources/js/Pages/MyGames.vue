@@ -3,11 +3,11 @@
         <h2 class="text-center text-white mb-3">My Games</h2>
         <b-spinner v-if="loader" variant="primary" v-show="loader" label="Loading..."></b-spinner>
         <div v-else class="d-flex flex-wrap justify-content-around">
-            <b-card no-body class="overflow-hidden mb-3 mr-2" style="max-width: 540px;" v-for="game in this.myGames" :key="game.id"
+            <b-card no-body class="overflow-hidden mb-3 mr-2" style="max-width: 540px" v-for="game in this.myGames" :key="game.id"
             bg-variant="dark" border-variant="primary" text-variant="white">
                 <b-row no-gutters>
                     <b-col md="6" class="d-flex justify-content-center align-items-center">
-                        <b-card-img :src="domain + 'storage/uploads/images/original/' + (getImage(game.game.id) !== undefined ? getImage(game.game.id) : 'default-game-image.png')" alt="Image" class="rounded-0"></b-card-img>
+                        <b-card-img style="max-height: 180px; object-fit: cover;" :src="domain + 'storage/uploads/images/original/' + (getImage(game.game.id) !== undefined ? getImage(game.game.id) : 'default-game-image.png')" alt="Image" class="rounded-0"></b-card-img>
                     </b-col>
                     <b-col md="6">
                         <b-card-body :title="game.game.title">
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
     name: "MyGames",
@@ -49,6 +49,7 @@ export default {
             domain: 'http://127.0.0.1:8000/',
             selectedGameId: null,
             loader: true,
+            gameImageName: '',
         }
     },
     methods: {
@@ -56,17 +57,15 @@ export default {
         selectEditedGame(id){
             this.setEditedGameId(id)
         },
-        getImage(id){
-            for(let i = 0; i < this.gamesList.length; i++) {
-                if(this.gamesList[i].id === id && this.gamesList[i].images[0]){
-                return this.gamesList[i].images[0].title
-                } else {
-                    return undefined
+        getImage(id) {
+            for (let i = 0; i < this.gamesList.length; i++) {
+                if (this.gamesList[i].id === id && this.gamesList[i].images.length > 0) {
+                    return this.gamesList[i].images[0].title;
                 }
             }
         }
     },
-    created: function () {
+    created() {
         this.getGames();
         this.getMySelectedGames();
     },

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GameRequest;
 use App\Models\Game;
 use App\Models\Rank;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Throwable;
 
@@ -36,11 +36,11 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param GameRequest $request
      * @return RedirectResponse
      * @throws Throwable
      */
-    public function store(Request $request): RedirectResponse
+    public function store(GameRequest $request): RedirectResponse
     {
         return $this->update($request, new Game());
     }
@@ -72,12 +72,12 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param GameRequest $request
      * @param Game $game
      * @return RedirectResponse
      * @throws Throwable
      */
-    public function update(Request $request, Game $game): RedirectResponse
+    public function update(GameRequest $request, Game $game): RedirectResponse
     {
         $game->updateGames($request);
         $game->createGame($request);

@@ -77,6 +77,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Dashboard",
@@ -328,9 +336,13 @@ var render = function() {
                         {
                           staticClass: "float-right ml-3",
                           attrs: { variant: "primary" },
-                          on: { click: _vm.logConsole }
+                          on: {
+                            click: function($event) {
+                              return _vm.$router.push({ name: "SquadsList" })
+                            }
+                          }
                         },
-                        [_vm._v("Find Your Squad")]
+                        [_vm._v("Find Your Squad\n                    ")]
                       )
                     ],
                     1
@@ -364,9 +376,13 @@ var render = function() {
                         {
                           staticClass: "float-right ml-3",
                           attrs: { variant: "primary" },
-                          on: { click: _vm.logConsole }
+                          on: {
+                            click: function($event) {
+                              return _vm.$router.push({ name: "SquadsList" })
+                            }
+                          }
                         },
-                        [_vm._v("Find Your Squad")]
+                        [_vm._v("Find Your Squad\n                    ")]
                       )
                     ],
                     1
@@ -399,9 +415,14 @@ var render = function() {
                         "b-button",
                         {
                           staticClass: "float-right ml-3",
-                          attrs: { variant: "primary" }
+                          attrs: { variant: "primary" },
+                          on: {
+                            click: function($event) {
+                              return _vm.$router.push({ name: "GamesList" })
+                            }
+                          }
                         },
-                        [_vm._v("Select Your Games")]
+                        [_vm._v("Select Your Games\n                    ")]
                       )
                     ],
                     1
@@ -438,9 +459,14 @@ var render = function() {
                           "b-button",
                           {
                             staticClass: "float-right ml-3",
-                            attrs: { variant: "primary" }
+                            attrs: { variant: "primary" },
+                            on: {
+                              click: function($event) {
+                                return _vm.$router.push({ name: "GamesList" })
+                              }
+                            }
                           },
-                          [_vm._v("Join")]
+                          [_vm._v("Add Game\n                    ")]
                         )
                       ],
                       1

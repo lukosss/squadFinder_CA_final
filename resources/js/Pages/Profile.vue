@@ -95,19 +95,19 @@
                     </div>
                 </div>
 
-                <b-form-group label="Profile Logo" label-for="images">
-                    <b-form-file
-                        v-model="file1"
-                        :state="Boolean(file1)"
-                        id="images"
-                        placeholder="Choose a file or drop it here..."
-                        drop-placeholder="Drop file here..."
-                    ></b-form-file>
-                    <div class="mt-3">Selected file: {{ file1 ? file1.name : '' }}</div>
-                    <div class="mt-3" v-if="file1 !== null">Current image:
-                        <b-img :src="domain + 'storage/uploads/images/thumb/'+file1"></b-img>
-                    </div>
-                </b-form-group>
+<!--                <b-form-group label="Profile Logo" label-for="images">-->
+<!--                    <b-form-file-->
+<!--                        v-model="file1"-->
+<!--                        :state="Boolean(file1)"-->
+<!--                        id="images"-->
+<!--                        placeholder="Choose a file or drop it here..."-->
+<!--                        drop-placeholder="Drop file here..."-->
+<!--                    ></b-form-file>-->
+<!--                    <div class="mt-3">Selected file: {{ file1 ? file1.name : '' }}</div>-->
+<!--                    <div class="mt-3" v-if="file1 !== null">Current image:-->
+<!--                        <b-img :src="domain + 'storage/uploads/images/thumb/'+file1"></b-img>-->
+<!--                    </div>-->
+<!--                </b-form-group>-->
                 <b-alert v-model="showDismissibleAlertMessage" variant="success" dismissible>
                     Profile Saved!
                 </b-alert>
@@ -180,7 +180,7 @@ export default {
                 this.origin_username = '';
                 this.selected_city = null;
                 this.loader = false;
-                this.file1 = null;
+                // this.file1 = null;
             }
         },
     },
@@ -189,7 +189,7 @@ export default {
             console.log(this.file1)
         },
         handleSubmit() {
-            if (this.file1 !== null || this.userFirstName.images[0].title !== this.file1) {
+            // if (this.file1 !== null || this.userFirstName.images[0].title !== this.file1) {
                 this.updateUser({
                     first_name: this.first_name,
                     email: this.email,
@@ -201,22 +201,22 @@ export default {
                     epic_username: this.epic_username,
                     origin_username: this.origin_username,
                     city_id: this.selected_city,
-                    images: this.file1,
+                    // images: this.file1,
                 })
-            } else {
-                this.updateUser({
-                    first_name: this.first_name,
-                    email: this.email,
-                    last_name: this.last_name,
-                    display_name: this.display_name,
-                    bio: this.bio,
-                    discord_username: this.discord_username,
-                    steam_username: this.steam_username,
-                    epic_username: this.epic_username,
-                    origin_username: this.origin_username,
-                    city_id: this.selected_city,
-                })
-            }
+            // } else {
+            //     this.updateUser({
+            //         first_name: this.first_name,
+            //         email: this.email,
+            //         last_name: this.last_name,
+            //         display_name: this.display_name,
+            //         bio: this.bio,
+            //         discord_username: this.discord_username,
+            //         steam_username: this.steam_username,
+            //         epic_username: this.epic_username,
+            //         origin_username: this.origin_username,
+            //         city_id: this.selected_city,
+            //     })
+            // }
             this.showDismissibleAlertMessage = true;
         },
         ...mapActions('profile', ['getUser', 'updateUser', 'getCities'])

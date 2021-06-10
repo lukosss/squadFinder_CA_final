@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UserRequest;
+use App\Models\City;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +19,7 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $users = User::with(['role', 'images'])->get();
+        $users = User::with(['role', 'images', 'city'])->get();
         return view('admin.users.index', compact('users'));
     }
 
@@ -34,11 +36,11 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param StoreUserRequest $request
+     * @param UserRequest $request
      * @return RedirectResponse
      * @throws Throwable
      */
-    public function store(StoreUserRequest $request): RedirectResponse
+    public function store(UserRequest $request): RedirectResponse
     {
         return $this->update($request, new User());
     }
@@ -58,19 +60,21 @@ class UserController extends Controller
      */
     public function edit(User $user): View
     {
-        $model = $user;
-        return view('admin.users.edit', compact('model'));
+        $model = $user->load('city', 'role');
+        $cities = City::get();
+        $roles = Role::get();
+        return view('admin.users.edit', compact('model', 'cities', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param StoreUserRequest $request
+     * @param UserRequest $request
      * @param User $user
      * @return RedirectResponse
      * @throws Throwable
      */
-    public function update(StoreUserRequest $request, User $user): RedirectResponse
+    public function update(UserRequest $request, User $user): RedirectResponse
     {
         $user->createUser($request);
         return redirect()->route('admin.users.index');

@@ -21,14 +21,12 @@ class ProfileController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
      * @return Response
      */
     public function show(): Response
     {
         $userId = auth('sanctum')->user()->id;
-        return User::where('id', $userId)->with('role', 'images')->get();
+        return response(User::where('id', $userId)->with('role', 'images')->get());
     }
 
     /**

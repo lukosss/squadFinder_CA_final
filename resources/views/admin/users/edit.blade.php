@@ -50,9 +50,29 @@
                                 </div>
 
                                 <div class="form-group col-4">
-                                    <label for="city">@lang('app.city_id')</label>
-                                    <input type="text" class="form-control" name="city" id="city"
-                                           value="{{$model->city_id ?? ''}}" placeholder="@lang('app.enter_city')">
+                                    <label for="role_id">@lang('app.role')</label>
+                                    <select class="js-example-basic-single" name="role_id" style="width: 100%;">
+                                        <option disabled selected> ------- </option>
+                                        @foreach($roles as $role)
+                                            <option
+                                                {{($model->role->id ?? '') == $role->id ? 'selected=selected' : ''}} value="{{$role->id}}">
+                                                {{$role->role_name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-4">
+                                    <label for="city_id">@lang('app.city_name')</label>
+                                    <select class="js-example-basic-single" name="city_id" style="width: 100%;">
+                                        <option disabled selected> ------- </option>
+                                        @foreach($cities as $city)
+                                            <option
+                                                {{($model->city->id ?? '') == $city->id ? 'selected=selected' : ''}} value="{{$city->id}}">
+                                                {{$city->city_name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="form-group col-4">
@@ -113,7 +133,7 @@
                                 <div class="form-group col-4">
                                     <label for="password">@lang('app.password')</label>
                                     <input type="password" class="form-control" name="password" id="password"
-                                           value="{{$model->password ?? ''}}" placeholder="@lang('app.enter_password')">
+                                           value="{{$model->password ?? ''}}" disabled="{{$model->password}}" placeholder="@lang('app.enter_password')">
                                 </div>
                             </div>
                                 @if ($errors->first)

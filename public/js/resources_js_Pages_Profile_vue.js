@@ -141,6 +141,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Profile",
@@ -197,8 +198,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.epic_username = '';
         this.origin_username = '';
         this.selected_city = null;
-        this.loader = false;
-        this.file1 = null;
+        this.loader = false; // this.file1 = null;
       }
     }
   },
@@ -207,34 +207,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log(this.file1);
     },
     handleSubmit: function handleSubmit() {
-      if (this.file1 !== null || this.userFirstName.images[0].title !== this.file1[0].name) {
-        this.updateUser({
-          first_name: this.first_name,
-          email: this.email,
-          last_name: this.last_name,
-          display_name: this.display_name,
-          bio: this.bio,
-          discord_username: this.discord_username,
-          steam_username: this.steam_username,
-          epic_username: this.epic_username,
-          origin_username: this.origin_username,
-          city_id: this.selected_city,
-          images: this.file1
-        });
-      } else {
-        this.updateUser({
-          first_name: this.first_name,
-          email: this.email,
-          last_name: this.last_name,
-          display_name: this.display_name,
-          bio: this.bio,
-          discord_username: this.discord_username,
-          steam_username: this.steam_username,
-          epic_username: this.epic_username,
-          origin_username: this.origin_username,
-          city_id: this.selected_city
-        });
-      }
+      // if (this.file1 !== null || this.userFirstName.images[0].title !== this.file1) {
+      this.updateUser({
+        first_name: this.first_name,
+        email: this.email,
+        last_name: this.last_name,
+        display_name: this.display_name,
+        bio: this.bio,
+        discord_username: this.discord_username,
+        steam_username: this.steam_username,
+        epic_username: this.epic_username,
+        origin_username: this.origin_username,
+        city_id: this.selected_city // images: this.file1,
+
+      }); // } else {
+      //     this.updateUser({
+      //         first_name: this.first_name,
+      //         email: this.email,
+      //         last_name: this.last_name,
+      //         display_name: this.display_name,
+      //         bio: this.bio,
+      //         discord_username: this.discord_username,
+      //         steam_username: this.steam_username,
+      //         epic_username: this.epic_username,
+      //         origin_username: this.origin_username,
+      //         city_id: this.selected_city,
+      //     })
+      // }
 
       this.showDismissibleAlertMessage = true;
     }
@@ -547,9 +546,9 @@ var render = function() {
                                     { key: city.id, attrs: { value: city.id } },
                                     [
                                       _vm._v(
-                                        "\n                                " +
+                                        "\n                                    " +
                                           _vm._s(city.city_name) +
-                                          "\n                            "
+                                          "\n                                "
                                       )
                                     ]
                                   )
@@ -684,56 +683,6 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c(
-                    "b-form-group",
-                    { attrs: { label: "Profile Logo", "label-for": "images" } },
-                    [
-                      _c("b-form-file", {
-                        attrs: {
-                          multiple: "",
-                          state: Boolean(_vm.file1),
-                          id: "images",
-                          placeholder: "Choose a file or drop it here...",
-                          "drop-placeholder": "Drop file here..."
-                        },
-                        model: {
-                          value: _vm.file1,
-                          callback: function($$v) {
-                            _vm.file1 = $$v
-                          },
-                          expression: "file1"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mt-3" }, [
-                        _vm._v(
-                          "Selected file: " +
-                            _vm._s(_vm.file1 ? _vm.file1[0].name : "")
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm.file1 !== null
-                        ? _c(
-                            "div",
-                            { staticClass: "mt-3" },
-                            [
-                              _vm._v("Current image: "),
-                              _c("b-img", {
-                                attrs: {
-                                  src:
-                                    _vm.domain +
-                                    "storage/uploads/images/thumb/" +
-                                    _vm.file1[0].name
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
                     "b-alert",
                     {
                       attrs: { variant: "success", dismissible: "" },
@@ -745,7 +694,11 @@ var render = function() {
                         expression: "showDismissibleAlertMessage"
                       }
                     },
-                    [_vm._v("\n                Profile Saved!\n            ")]
+                    [
+                      _vm._v(
+                        "\n                    Profile Saved!\n                "
+                      )
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
@@ -755,7 +708,11 @@ var render = function() {
                       _c(
                         "b-button",
                         { attrs: { type: "submit", variant: "primary" } },
-                        [_vm._v("\n                    Save\n                ")]
+                        [
+                          _vm._v(
+                            "\n                        Save\n                    "
+                          )
+                        ]
                       )
                     ],
                     1

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CityRequest;
 use App\Models\City;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class CityController extends Controller
@@ -34,10 +34,10 @@ class CityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param CityRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(CityRequest $request): RedirectResponse
     {
         return $this->update($request, new City());
     }
@@ -68,11 +68,11 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param CityRequest $request
      * @param City $city
      * @return RedirectResponse
      */
-    public function update(Request $request, City $city): RedirectResponse
+    public function update(CityRequest $request, City $city): RedirectResponse
     {
         $city->fill($request->all())->save();
         return redirect()->route('admin.cities.index');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserGameRequest;
 use App\Models\Game;
 use App\Models\GameUser;
 use App\Models\Rank;
@@ -37,10 +38,10 @@ class GameUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param UserGameRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(UserGameRequest $request): RedirectResponse
     {
         return $this->update($request, new GameUser());
     }
@@ -75,11 +76,11 @@ class GameUserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param UserGameRequest $request
      * @param GameUser $gameUser
      * @return RedirectResponse
      */
-    public function update(Request $request, GameUser $gameUser): RedirectResponse
+    public function update(UserGameRequest $request, GameUser $gameUser): RedirectResponse
     {
         $gameUser->fill($request->all())->save();
         return redirect()->route('admin.game-user.index');

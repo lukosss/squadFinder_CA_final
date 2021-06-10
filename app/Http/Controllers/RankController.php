@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RankRequest;
 use App\Models\Rank;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class RankController extends Controller
@@ -34,10 +34,10 @@ class RankController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param RankRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RankRequest $request): RedirectResponse
     {
         return $this->update($request, new Rank());
     }
@@ -68,11 +68,11 @@ class RankController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param RankRequest $request
      * @param Rank $rank
      * @return RedirectResponse
      */
-    public function update(Request $request, Rank $rank): RedirectResponse
+    public function update(RankRequest $request, Rank $rank): RedirectResponse
     {
         $rank->fill($request->all())->save();
         return redirect()->route('admin.ranks.index');

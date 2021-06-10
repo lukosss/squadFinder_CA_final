@@ -41,33 +41,6 @@
                                         @endforeach
                                     </select>
                                 </div>
-
-{{--                                <div class="form-group col-4">--}}
-{{--                                    <label for="game_id">@lang('app.game_name')</label>--}}
-{{--                                    <select class="js-example-basic-single" name="game_id" style="width: 100%;">--}}
-{{--                                        <option disabled selected> ------- </option>--}}
-{{--                                        @foreach($games as $game)--}}
-{{--                                            <option--}}
-{{--                                                {{($model->game->id ?? '') == $game->id ? 'selected=selected' : ''}} value="{{$game->id}}">--}}
-{{--                                                {{$game->title}}--}}
-{{--                                            </option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group col-4">--}}
-{{--                                    <label for="rank_id">@lang('app.game_rank')</label>--}}
-{{--                                    <select class="js-example-basic-single" name="rank_id" style="width: 100%;">--}}
-{{--                                        <option disabled selected> ------- </option>--}}
-{{--                                        @foreach($ranks as $rank)--}}
-{{--                                            <option--}}
-{{--                                                {{($model->rank->id ?? '') == $rank->id ? 'selected=selected' : ''}} value="{{$rank->id}}">--}}
-{{--                                                {{$rank->rank_name}}--}}
-{{--                                            </option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-
                                 <div class="form-group col-4">
                                     <label for="rank">@lang('app.game')</label>
                                     <select class="select2 select2spec" name="game_id" id="game"

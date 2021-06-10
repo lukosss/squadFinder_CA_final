@@ -15,13 +15,14 @@ import { ValidationProvider } from 'vee-validate/dist/vee-validate.full.esm';
 import {ValidationObserver} from "vee-validate";
 import {getSelections} from "./script";
 
-window.App = {
-    getSelections: (route, target, modelId) => getSelections(route, target, modelId)
-};
 
 /**
  * select 2 logic
  */
+window.App = {
+    getSelections: (route, target, modelId) => getSelections(route, target, modelId)
+};
+
 $(document).ready(function() {
     $('.select2').select2({
         closeOnSelect: false
@@ -55,9 +56,6 @@ parent.trigger('change');
  *
  * Eg. ./Components/LandingPage.vue -> <example-component></example-component>
  */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);

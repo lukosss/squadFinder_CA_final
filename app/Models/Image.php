@@ -38,7 +38,7 @@ class Image extends Model
     }
 
     /**
-     * @param array $images
+     * @param array|null $images
      * @return Collection
      * @throws Throwable
      */

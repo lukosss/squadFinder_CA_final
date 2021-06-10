@@ -7,6 +7,8 @@ use App\Models\Rank;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Throwable;
 
 class GameController extends Controller
 {
@@ -24,7 +26,7 @@ class GameController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create(): View
     {
@@ -34,8 +36,9 @@ class GameController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return RedirectResponse
+     * @throws Throwable
      */
     public function store(Request $request): RedirectResponse
     {
@@ -45,8 +48,8 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Response
      */
     public function show($id)
     {
@@ -63,15 +66,16 @@ class GameController extends Controller
     {
         $model = $game->load('ranks');
         $ranks = Rank::get();
-        return view('admin.games.edit', compact('model','ranks'));
+        return view('admin.games.edit', compact('model', 'ranks'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param Game $game
      * @return RedirectResponse
+     * @throws Throwable
      */
     public function update(Request $request, Game $game): RedirectResponse
     {
@@ -84,9 +88,9 @@ class GameController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
         $game = Game::find($id);
         $game->delete();

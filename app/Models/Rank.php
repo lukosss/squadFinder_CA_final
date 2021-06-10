@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Rank extends Model
 {
@@ -13,7 +14,10 @@ class Rank extends Model
         'rank_name',
     ];
 
-    public function games()
+    /**
+     * @return BelongsToMany
+     */
+    public function games(): BelongsToMany
     {
         return $this->belongsToMany(Game::class);
     }

@@ -32,7 +32,7 @@ class API {
 
     static async getCities() {
         try {
-            const { data } = await axios.get(`${this.domain}/api/cities`);
+            const {data} = await axios.get(`${this.domain}/api/cities`);
             return data;
         } catch (err) {
             throw err.message;
@@ -41,7 +41,7 @@ class API {
 
     static async getGames() {
         try {
-            const { data } = await axios.get(`${this.domain}/api/games`);
+            const {data} = await axios.get(`${this.domain}/api/games`);
             return data;
         } catch (err) {
             throw err.message;
@@ -50,7 +50,7 @@ class API {
 
     static async getSelectedGames() {
         try {
-            const { data } = await axios.get(`${this.domain}/api/selected-games`);
+            const {data} = await axios.get(`${this.domain}/api/selected-games`);
             return data;
         } catch (err) {
             throw err.message;
@@ -59,7 +59,7 @@ class API {
 
     static async getMySelectedGames() {
         try {
-            const { data } = await axios.get(`${this.domain}/api/selected-games/my-games`);
+            const {data} = await axios.get(`${this.domain}/api/selected-games/my-games`);
             return data;
         } catch (err) {
             throw err.message;
@@ -77,7 +77,7 @@ class API {
 
     static async postGameInfo(body) {
         try {
-            const { data } = await axios.post(`${this.domain}/api/selected-games/add-game`, body);
+            const {data} = await axios.post(`${this.domain}/api/selected-games/add-game`, body);
             return data;
         } catch (err) {
             throw err.message;

@@ -9,13 +9,15 @@
 
             <div v-else>
                 <b-card class="mb-3"
-                    bg-variant="dark"
-                    text-variant="white"
-                    border-variant="primary"
+                        bg-variant="dark"
+                        text-variant="white"
+                        border-variant="primary"
                 >
                     <b-card-text class="h3 font-weight-bold text-shadow">
                         Currently {{ (this.usersList).length }} players looking for squad
-                        <b-button class="float-right ml-3" variant="primary" @click="logConsole">Find Your Squad</b-button>
+                        <b-button class="float-right ml-3" variant="primary"
+                                  @click="$router.push({name: 'SquadsList'});">Find Your Squad
+                        </b-button>
                     </b-card-text>
                 </b-card>
 
@@ -26,18 +28,22 @@
                 >
                     <b-card-text class="h3 font-weight-bold text-shadow">
                         Currently {{ this.popularGame.title }} is the most played game
-                        <b-button class="float-right ml-3" variant="primary" @click="logConsole">Find Your Squad</b-button>
+                        <b-button class="float-right ml-3" variant="primary"
+                                  @click="$router.push({name: 'SquadsList'});">Find Your Squad
+                        </b-button>
                     </b-card-text>
                 </b-card>
 
                 <b-card class="mb-3"
                         bg-variant="dark"
-                    text-variant="white"
-                    border-variant="primary"
+                        text-variant="white"
+                        border-variant="primary"
                 >
                     <b-card-text class="h3 font-weight-bold text-shadow">
                         Currently there are {{ (this.gamesList).length }} games to choose from
-                        <b-button class="float-right ml-3" variant="primary">Select Your Games</b-button>
+                        <b-button class="float-right ml-3" variant="primary"
+                                  @click="$router.push({name: 'GamesList'});">Select Your Games
+                        </b-button>
                     </b-card-text>
                 </b-card>
 
@@ -48,8 +54,10 @@
                         v-for="game in currentGames" :key="game.id"
                 >
                     <b-card-text class="h3 font-weight-bold text-shadow">
-                        Currently {{game.number}} players on {{game.title}}
-                        <b-button class="float-right ml-3" variant="primary">Join</b-button>
+                        Currently {{ game.number }} players on {{ game.title }}
+                        <b-button class="float-right ml-3" variant="primary"
+                                  @click="$router.push({name: 'GamesList'});">Add Game
+                        </b-button>
                     </b-card-text>
                 </b-card>
             </div>
@@ -58,11 +66,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
-name: "Dashboard",
-    data(){
+    name: "Dashboard",
+    data() {
         return {
             games: [],
             users: [],
@@ -77,19 +85,20 @@ name: "Dashboard",
 
             console.log(popularGame);
         },
-        countGames(){
+        countGames() {
             function gameExists(title, arr) {
-                return arr.some(function(el) {
+                return arr.some(function (el) {
                     return el.title === title;
-                })}
+                })
+            }
 
             for (let i = 0; i < this.selectedGamesList.length; i++) {
-                if(!gameExists(this.selectedGamesList[i].game.title, this.currentGames)) {
+                if (!gameExists(this.selectedGamesList[i].game.title, this.currentGames)) {
                     this.currentGames.push({title: this.selectedGamesList[i].game.title, number: 1})
                 } else {
                     let selectedGame = this.selectedGamesList[i].game.title;
                     let selectedGameIndex = this.currentGames.findIndex(x => x.title == selectedGame);
-                        this.currentGames[selectedGameIndex].number++
+                    this.currentGames[selectedGameIndex].number++
                 }
             }
             this.popularGame = this.currentGames.reduce((prev, current) => (prev.number > current.number) ? prev : current, 1)
@@ -119,7 +128,7 @@ name: "Dashboard",
 </script>
 
 <style scoped>
-    .text-shadow {
-        text-shadow: 4px 4px 7px rgba(150, 150, 150, 1);
-    }
+.text-shadow {
+    text-shadow: 4px 4px 7px rgba(150, 150, 150, 1);
+}
 </style>

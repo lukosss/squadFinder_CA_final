@@ -19,7 +19,10 @@ class Game extends Model
         'game_logo',
     ];
 
-    public function ranks()
+    /**
+     * @return BelongsToMany
+     */
+    public function ranks(): BelongsToMany
     {
         return $this->belongsToMany(Rank::class);
     }
@@ -53,7 +56,7 @@ class Game extends Model
      */
     public function updateGames(Request $request): void
     {
-        DB::transaction(function () use($request){
+        DB::transaction(function () use ($request) {
             $this->fill($request->all())->save();
             $this->ranks()->sync($request->ranks);
         });

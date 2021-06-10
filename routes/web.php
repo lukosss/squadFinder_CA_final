@@ -28,9 +28,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Logins
 Route::post('/loginFront', [LoginControllerFront::class, 'authenticate']);
 Route::post('/registerFront', [LoginControllerFront::class, 'register']);
 
+// Admin panel
 Route::prefix('admin')
     ->middleware('auth')
     ->name('admin.')->group(function(){

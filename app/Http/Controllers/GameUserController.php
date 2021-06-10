@@ -27,7 +27,7 @@ class GameUserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create(): View
     {
@@ -37,7 +37,7 @@ class GameUserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
@@ -49,7 +49,7 @@ class GameUserController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -64,7 +64,7 @@ class GameUserController extends Controller
      */
     public function edit(GameUser $gameUser): View
     {
-        $model = $gameUser->load(['rank','user','game']);
+        $model = $gameUser->load(['rank', 'user', 'game']);
         $games = Game::get();
         $ranks = Rank::get();
         $users = User::get();
@@ -75,7 +75,7 @@ class GameUserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param GameUser $gameUser
      * @return RedirectResponse
      */
@@ -115,9 +115,9 @@ class GameUserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
         $game = GameUser::find($id);
         $game->delete();

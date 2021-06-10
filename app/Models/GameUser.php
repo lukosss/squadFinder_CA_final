@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class GameUser extends Model
 {
@@ -17,17 +18,26 @@ class GameUser extends Model
         'comment',
     ];
 
-    public function rank()
+    /**
+     * @return BelongsTo
+     */
+    public function rank(): BelongsTo
     {
         return $this->belongsTo(Rank::class);
     }
 
-    public function game()
+    /**
+     * @return BelongsTo
+     */
+    public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class);
     }
 
-    public function user()
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

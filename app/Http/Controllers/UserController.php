@@ -6,14 +6,14 @@ use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
+use Throwable;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index(): View
     {
@@ -24,7 +24,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create(): View
     {
@@ -34,8 +34,9 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreUserRequest $request
+     * @return RedirectResponse
+     * @throws Throwable
      */
     public function store(StoreUserRequest $request): RedirectResponse
     {
@@ -50,7 +51,6 @@ class UserController extends Controller
     {
         //
     }
-
 
     /**
      * @param User $user
@@ -68,6 +68,7 @@ class UserController extends Controller
      * @param StoreUserRequest $request
      * @param User $user
      * @return RedirectResponse
+     * @throws Throwable
      */
     public function update(StoreUserRequest $request, User $user): RedirectResponse
     {
@@ -78,10 +79,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(int $id): RedirectResponse
     {
         $user = User::find($id);
         $user->delete();

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -13,11 +16,11 @@ class LoginControllerFront extends Controller
     /**
      * Handle an authentication attempt.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function authenticate(Request $request): Response
+    public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->only('email', 'password');
 
@@ -27,12 +30,12 @@ class LoginControllerFront extends Controller
         }
     }
 
-
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|Response
+     * @return Application|ResponseFactory|Response
      */
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $fields = $request->validate([
             'first_name' => 'required|string',
             'email' => 'required|string|unique:users,email',

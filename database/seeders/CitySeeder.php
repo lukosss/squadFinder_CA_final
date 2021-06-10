@@ -22,7 +22,11 @@ class CitySeeder extends Seeder
         }
     }
 
-    private function cities(){
+    /**
+     * @return string[]
+     */
+    private function cities(): array
+    {
         return [
 
             'Vilnius',

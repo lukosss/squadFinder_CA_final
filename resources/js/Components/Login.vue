@@ -64,9 +64,10 @@ export default {
                 password: this.form.password
             })
                 .then(function (response) {
-                    console.log(response);
+                    window.location.href = '/home';
                 })
                 .catch(function (error) {
+                    console.log(error)
                     window.location.href = '/home';
                 });
         },

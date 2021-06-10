@@ -95,18 +95,19 @@
                     </div>
                 </div>
 
-                            <b-form-group label="Profile Logo" label-for="images">
-                                <b-form-file
-                                    multiple
-                                    v-model="file1"
-                                    :state="Boolean(file1)"
-                                    id="images"
-                                    placeholder="Choose a file or drop it here..."
-                                    drop-placeholder="Drop file here..."
-                                ></b-form-file>
-                                <div class="mt-3">Selected file: {{ file1 ? file1[0].name : '' }}</div>
-                                <div class="mt-3" v-if="file1 !== null">Current image: <b-img :src="domain + 'storage/uploads/images/thumb/'+file1[0].name"></b-img></div>
-                            </b-form-group>
+                <b-form-group label="Profile Logo" label-for="images">
+                    <b-form-file
+                        v-model="file1"
+                        :state="Boolean(file1)"
+                        id="images"
+                        placeholder="Choose a file or drop it here..."
+                        drop-placeholder="Drop file here..."
+                    ></b-form-file>
+                    <div class="mt-3">Selected file: {{ file1 ? file1.name : '' }}</div>
+                    <div class="mt-3" v-if="file1 !== null">Current image:
+                        <b-img :src="domain + 'storage/uploads/images/thumb/'+file1"></b-img>
+                    </div>
+                </b-form-group>
                 <b-alert v-model="showDismissibleAlertMessage" variant="success" dismissible>
                     Profile Saved!
                 </b-alert>
@@ -162,7 +163,7 @@ export default {
                 this.epic_username = newUser.epic_username;
                 this.origin_username = newUser.origin_username;
                 this.selected_city = newUser.city_id;
-                if(newUser.images.length > 0 ){
+                if (newUser.images.length > 0) {
                     this.file1 = newUser.images[0].title;
                 }
                 this.loader = false;
@@ -188,7 +189,7 @@ export default {
             console.log(this.file1)
         },
         handleSubmit() {
-            if(this.file1 !== null || this.userFirstName.images[0].title !== this.file1[0].name) {
+            if (this.file1 !== null || this.userFirstName.images[0].title !== this.file1) {
                 this.updateUser({
                     first_name: this.first_name,
                     email: this.email,

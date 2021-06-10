@@ -4,33 +4,33 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="{{ route('admin.') }}" class="nav-link active" aria-current="page">
+        <li class="nav-item" >
+            <a href="{{ route('admin.') }}" class="{{ (request()->is('admin/home*')) ? 'active' : '' }} nav-link text-white" aria-current="page">
                 Home
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.users.index') }}" class="nav-link text-white">
+            <a href="{{ route('admin.users.index') }}" class="{{ (request()->is('admin/users*')) ? 'active' : '' }} nav-link text-white">
                 Users
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.games.index') }}" class="nav-link text-white">
+            <a href="{{ route('admin.games.index') }}" class="{{ (request()->is('admin/games*')) ? 'active' : '' }} nav-link text-white">
                 Games
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.ranks.index') }}" class="nav-link text-white">
+            <a href="{{ route('admin.ranks.index') }}" class="{{ (request()->is('admin/ranks*')) ? 'active' : '' }} nav-link text-white">
                 Ranks
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.cities.index') }}" class="nav-link text-white">
+            <a href="{{ route('admin.cities.index') }}" class="{{ (request()->is('admin/cities*')) ? 'active' : '' }} nav-link text-white">
                 Cities
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.game-user.index') }}" class="nav-link text-white">
+            <a href="{{ route('admin.game-user.index') }}" class="{{ (request()->is('admin/game-user*')) ? 'active' : '' }} nav-link text-white">
                 Users Games
             </a>
         </li>

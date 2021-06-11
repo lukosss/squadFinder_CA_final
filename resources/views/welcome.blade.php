@@ -27,8 +27,8 @@
 
     <nav  class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                SquadFinder
+            <a class="navbar-brand">
+                <i><b class="text-uppercase">Squad Finder</b></i>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -54,7 +54,7 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                                {{ Auth::user()->first_name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -74,7 +74,14 @@
             </div>
         </div>
     </nav>
+        @guest
 <landing-page></landing-page>
+        @else
+            <script type="text/javascript">
+                window.location = "{{ url('/home') }}";
+            </script>
+        @endguest
+
     </div>
     </body>
 <script src="{{ mix('js/app.js') }}"></script>

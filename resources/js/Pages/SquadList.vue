@@ -70,7 +70,7 @@
 
                 <template #cell(userInfo)="data">
                     <b-button :id="data.item.id+'popover'" variant="primary">
-                        Show
+                        Show <i class="far fa-address-book"></i>
                     </b-button>
                     <b-popover :target="data.item.id+'popover'" triggers="hover" placement="left">
                         <template #title>

@@ -27,6 +27,7 @@
         "vuex": "^3.6.2"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.3",
         "bootstrap-vue": "^2.21.2",
         "select2": "^4.1.0-rc.0",
         "vee-validate": "^3.4.5"

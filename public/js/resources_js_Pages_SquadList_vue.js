@@ -532,7 +532,10 @@ var render = function() {
                         variant: "primary"
                       }
                     },
-                    [_vm._v("\n                    Show\n                ")]
+                    [
+                      _vm._v("\n                    Show "),
+                      _c("i", { staticClass: "far fa-address-book" })
+                    ]
                   ),
                   _vm._v(" "),
                   _c(

@@ -52,6 +52,7 @@ class HomeController extends Controller
         if (Auth::user()->role_id === 1) {
             return view('admin.home', compact('users', 'games', 'gamesAdded', 'ranks', 'cities', 'mostPopularGame', 'mostPopularGameId', 'mostPopularGamePlayers', 'latestUser', 'latestGame'));
         }
+
         return view('home');
     }
 }

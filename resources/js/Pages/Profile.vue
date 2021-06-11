@@ -4,7 +4,7 @@
             <b-spinner variant="primary" v-show="loader" label="Loading..."></b-spinner>
         </b-card>
         <b-card title="Your Profile" v-else shadow="true" class="mb-3" style="width: 120%;">
-            <b-form @submit.prevent="handleSubmit()">
+            <b-form @submit.prevent="handleSubmit()" enctype="multipart/form-data">
                 <div class="d-flex justify-content-around">
                     <div>
                         <b-form-group label="Name" label-for="first_name">
@@ -94,20 +94,6 @@
                         </b-form-group>
                     </div>
                 </div>
-
-<!--                <b-form-group label="Profile Logo" label-for="images">-->
-<!--                    <b-form-file-->
-<!--                        v-model="file1"-->
-<!--                        :state="Boolean(file1)"-->
-<!--                        id="images"-->
-<!--                        placeholder="Choose a file or drop it here..."-->
-<!--                        drop-placeholder="Drop file here..."-->
-<!--                    ></b-form-file>-->
-<!--                    <div class="mt-3">Selected file: {{ file1 ? file1.name : '' }}</div>-->
-<!--                    <div class="mt-3" v-if="file1 !== null">Current image:-->
-<!--                        <b-img :src="domain + 'storage/uploads/images/thumb/'+file1"></b-img>-->
-<!--                    </div>-->
-<!--                </b-form-group>-->
                 <b-alert v-model="showDismissibleAlertMessage" variant="success" dismissible>
                     Profile Saved!
                 </b-alert>
@@ -144,7 +130,6 @@ export default {
             origin_username: '',
             selected_city: null,
             loader: true,
-            file1: null,
             showDismissibleAlertMessage: false,
             domain: 'http://127.0.0.1:8000/'
         };
@@ -163,9 +148,6 @@ export default {
                 this.epic_username = newUser.epic_username;
                 this.origin_username = newUser.origin_username;
                 this.selected_city = newUser.city_id;
-                if (newUser.images.length > 0) {
-                    this.file1 = newUser.images[0].title;
-                }
                 this.loader = false;
             } else {
                 this.first_name = '';
@@ -180,16 +162,11 @@ export default {
                 this.origin_username = '';
                 this.selected_city = null;
                 this.loader = false;
-                // this.file1 = null;
             }
         },
     },
     methods: {
-        logConsole() {
-            console.log(this.file1)
-        },
         handleSubmit() {
-            // if (this.file1 !== null || this.userFirstName.images[0].title !== this.file1) {
                 this.updateUser({
                     first_name: this.first_name,
                     email: this.email,
@@ -201,22 +178,7 @@ export default {
                     epic_username: this.epic_username,
                     origin_username: this.origin_username,
                     city_id: this.selected_city,
-                    // images: this.file1,
                 })
-            // } else {
-            //     this.updateUser({
-            //         first_name: this.first_name,
-            //         email: this.email,
-            //         last_name: this.last_name,
-            //         display_name: this.display_name,
-            //         bio: this.bio,
-            //         discord_username: this.discord_username,
-            //         steam_username: this.steam_username,
-            //         epic_username: this.epic_username,
-            //         origin_username: this.origin_username,
-            //         city_id: this.selected_city,
-            //     })
-            // }
             this.showDismissibleAlertMessage = true;
         },
         ...mapActions('profile', ['getUser', 'updateUser', 'getCities'])

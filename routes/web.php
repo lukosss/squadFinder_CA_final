@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GameUserController;
 use App\Http\Controllers\HomeController;
@@ -46,3 +47,6 @@ Route::prefix('admin')
         Route::resource('game-user',GameUserController::class);
         Route::get('game-users/selections',[GameUserController::class,'selections'])->name('game-user.selections');
     });
+
+// File upload
+Route::post('/upload', [AvatarController::class, 'upload'])->name('upload');

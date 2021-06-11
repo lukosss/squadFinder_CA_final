@@ -89,6 +89,7 @@
 
                                 <div class="form-group col-4">
                                     <div class="image_container">
+                                        <label class="images" for="images">@lang('app.select_user_image')</label>
                                         @foreach($model->images as $image)
                                             <div class="image_block">
                                                 <span class="remove_image"><i class="fas fa-window-close">x</i></span>
@@ -100,7 +101,6 @@
                                         @endforeach
                                     </div>
                                     <input multiple type="file" name="images[]" class="images_input" id="user_images">
-                                    <label class="images" for="images">@lang('app.select_image')</label>
                                     <div id="image_display">
 
                                     </div>

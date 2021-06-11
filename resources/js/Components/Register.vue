@@ -94,6 +94,8 @@ export default {
     methods: {
         async onSubmit() {
 
+            let self = this;
+
             await axios.post('/registerFront', {
                 first_name: this.form.first_name,
                 email: this.form.email,
@@ -104,9 +106,8 @@ export default {
                     console.log(response);
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    self.showDismissibleAlert = true;
                 });
-            this.showDismissibleAlert = true;
         },
 
     }

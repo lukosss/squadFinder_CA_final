@@ -15,9 +15,9 @@ class CreateGameUsersTable extends Migration
     {
         Schema::create('game_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('game_id')->constrained('games', 'id');
-            $table->foreignId('user_id')->constrained('users', 'id');
-            $table->foreignId('rank_id')->nullable()->constrained('ranks', 'id');
+            $table->foreignId('game_id')->constrained('games', 'id')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users', 'id')->onDelete('cascade');
+            $table->foreignId('rank_id')->nullable()->constrained('ranks', 'id')->onDelete('cascade');
             $table->string('ingame_name')->nullable();
             $table->string('comment')->nullable();
             $table->timestamps();

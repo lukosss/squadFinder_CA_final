@@ -6,40 +6,27 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <router-link class="nav-link text-white" to="/home">
-                    Dashboard
+                <router-link class="nav-link text-white" to="/">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
                 </router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link text-white" to="/squads">
-                    Find Squadmates
+                    <i class="fas fa-search"></i> Find Squadmates
                 </router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link text-white" to="/my-games">
-                    My games
+                    <i class="fas fa-dice-d20"></i> My games
                 </router-link>
             </li>
             <li class="nav-item">
                 <router-link class="nav-link text-white" to="/games">
-                    Add games
+                    <i class="fas fa-gamepad"></i> Add games
                 </router-link>
             </li>
         </ul>
         <hr>
-        <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>mdo</strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
-            </ul>
-        </div>
     </div>
 
 </template>
@@ -50,5 +37,7 @@ export default {
 </script>
 
 <style scoped>
-
+    .is-active {
+        background-color: #433fd1;
+    }
 </style>

@@ -29,14 +29,11 @@
                             required
                         ></b-form-input>
                     </b-form-group>
-
-                    <div>
-                        <b-form-checkbox v-model="form.checked" name="check-button" switch>
-                            Remember me on this PC
-                        </b-form-checkbox>
-                    </div>
                 </b-form>
             </div>
+            <b-alert v-model="showDismissibleAlert" variant="danger" dismissible>
+                Incorrect email or password.
+            </b-alert>
             <template #modal-footer>
                 <b-button type="submit" form="loginForm" variant="primary">Submit</b-button>
             </template>
@@ -52,13 +49,16 @@ export default {
             form: {
                 email: '',
                 password: '',
-                checked: false,
             },
-            show: true
+            show: true,
+            showDismissibleAlert: false
         }
     },
     methods: {
         async onSubmit() {
+
+            let self = this;
+
             await axios.post('/loginFront', {
                 email: this.form.email,
                 password: this.form.password
@@ -67,8 +67,7 @@ export default {
                     window.location.href = '/home';
                 })
                 .catch(function (error) {
-                    console.log(error)
-                    window.location.href = '/home';
+                    self.showDismissibleAlert = true;
                 });
         },
     }

@@ -128,20 +128,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Profile",
@@ -161,7 +147,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       origin_username: '',
       selected_city: null,
       loader: true,
-      file1: null,
       showDismissibleAlertMessage: false,
       domain: 'http://127.0.0.1:8000/'
     };
@@ -180,11 +165,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.epic_username = newUser.epic_username;
         this.origin_username = newUser.origin_username;
         this.selected_city = newUser.city_id;
-
-        if (newUser.images.length > 0) {
-          this.file1 = newUser.images[0].title;
-        }
-
         this.loader = false;
       } else {
         this.first_name = '';
@@ -198,16 +178,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.epic_username = '';
         this.origin_username = '';
         this.selected_city = null;
-        this.loader = false; // this.file1 = null;
+        this.loader = false;
       }
     }
   },
   methods: _objectSpread({
-    logConsole: function logConsole() {
-      console.log(this.file1);
-    },
     handleSubmit: function handleSubmit() {
-      // if (this.file1 !== null || this.userFirstName.images[0].title !== this.file1) {
       this.updateUser({
         first_name: this.first_name,
         email: this.email,
@@ -218,23 +194,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         steam_username: this.steam_username,
         epic_username: this.epic_username,
         origin_username: this.origin_username,
-        city_id: this.selected_city // images: this.file1,
-
-      }); // } else {
-      //     this.updateUser({
-      //         first_name: this.first_name,
-      //         email: this.email,
-      //         last_name: this.last_name,
-      //         display_name: this.display_name,
-      //         bio: this.bio,
-      //         discord_username: this.discord_username,
-      //         steam_username: this.steam_username,
-      //         epic_username: this.epic_username,
-      //         origin_username: this.origin_username,
-      //         city_id: this.selected_city,
-      //     })
-      // }
-
+        city_id: this.selected_city
+      });
       this.showDismissibleAlertMessage = true;
     }
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('profile', ['getUser', 'updateUser', 'getCities'])),
@@ -417,6 +378,7 @@ var render = function() {
               _c(
                 "b-form",
                 {
+                  attrs: { enctype: "multipart/form-data" },
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
@@ -546,9 +508,9 @@ var render = function() {
                                     { key: city.id, attrs: { value: city.id } },
                                     [
                                       _vm._v(
-                                        "\n                                    " +
+                                        "\n                                " +
                                           _vm._s(city.city_name) +
-                                          "\n                                "
+                                          "\n                            "
                                       )
                                     ]
                                   )
@@ -694,11 +656,7 @@ var render = function() {
                         expression: "showDismissibleAlertMessage"
                       }
                     },
-                    [
-                      _vm._v(
-                        "\n                    Profile Saved!\n                "
-                      )
-                    ]
+                    [_vm._v("\n                Profile Saved!\n            ")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -708,11 +666,7 @@ var render = function() {
                       _c(
                         "b-button",
                         { attrs: { type: "submit", variant: "primary" } },
-                        [
-                          _vm._v(
-                            "\n                        Save\n                    "
-                          )
-                        ]
+                        [_vm._v("\n                    Save\n                ")]
                       )
                     ],
                     1

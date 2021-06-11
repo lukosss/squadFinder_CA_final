@@ -65,8 +65,11 @@
                         </ValidationProvider>
                     </b-form>
                 </ValidationObserver>
-                <b-alert v-model="showDismissibleAlert" variant="warning" dismissible>
+                <b-alert v-model="showDismissibleAlert" variant="success" dismissible>
                     Registration successful. You can now log in.
+                </b-alert>
+                <b-alert v-model="showDismissibleAlertError" variant="danger" dismissible>
+                    {{ error }} Email is already in use
                 </b-alert>
             </div>
             <template #modal-footer>
@@ -83,6 +86,8 @@ export default {
     data() {
         return {
             showDismissibleAlert: false,
+            showDismissibleAlertError: false,
+            error: '',
             form: {
                 first_name: '',
                 email: '',
@@ -103,10 +108,11 @@ export default {
                 password_confirmation: this.form.confirmPassword,
             })
                 .then(function (response) {
-                    console.log(response);
+                    self.showDismissibleAlert = true;
                 })
                 .catch(function (error) {
-                    self.showDismissibleAlert = true;
+                    self.error = error;
+                    self.showDismissibleAlertError = true;
                 });
         },
 

@@ -14,7 +14,7 @@
                         <li>Total number of ranks available: <b>{{$ranks->count()}}</b></li>
                         <li>Total number of cities available: <b>{{$cities->count()}}</b></li>
                         <li>Most popular game on the platform now: <b>{{$mostPopularGame[0]->title}}</b> with
-                            <b>{{$mostPopularGamePlayers->count()}}</b> players.
+                            <b>{{$mostPopularGamePlayers->count()+1}}</b> players.
                         </li>
                         <li>Latest registered user: <b>{{$latestUser->first_name}} {{$latestUser->last_name}}</b></li>
                         <li>Most recent added game: <b>{{$latestGame->title}}</b></li>

@@ -48,7 +48,7 @@
                                         <label class="images" for="images">@lang('app.select_image')</label>
                                         @foreach($model->images as $image)
                                             <div class="image_block">
-                                                <span class="remove_image"><i class="fas fa-window-close">x</i></span>
+                                                <span class="remove_image"><i class="fas fa-window-close"></i></span>
                                                 <a href="/storage/uploads/images/original/{{$image->title ?? ''}}">
                                                     <img src="/storage/uploads/images/thumb/{{$image->title ?? ''}}" alt="not available" width="80"/>
                                                 </a>

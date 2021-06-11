@@ -47,6 +47,3 @@ Route::prefix('admin')
         Route::resource('game-user',GameUserController::class);
         Route::get('game-users/selections',[GameUserController::class,'selections'])->name('game-user.selections');
     });
-
-// File upload
-Route::post('/upload', [AvatarController::class, 'upload'])->name('upload');

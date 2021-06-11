@@ -5,6 +5,11 @@ Vue.use(VueRouter);
 
 const routes = [
     {
+        path: '*',
+        name: 'NotFound',
+        component: () => import('../Pages/NotFound.vue'),
+    },
+    {
         path: '/',
         name: 'Dash',
         component: () => import('../Pages/Dashboard.vue'),
